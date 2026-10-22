@@ -1,0 +1,9 @@
+{
+  "id": "ai-reading-companion",
+  "name": "AI Reading Companion",
+  "version": "1.0.0",
+  "minAppVersion": "1.0.0",
+  "description": "Send the current PDF text selection to Copilot Agent Chat as a selection context.",
+  "author": "泽霏zefei",
+  "isDesktopOnly": false
+}

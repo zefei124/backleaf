@@ -1,0 +1,83 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+.tmp/
+.cache/
+
+# Generated Community Plugin bundle (root only; the Phase 1 plugin/ copy stays tracked).
+# It is uploaded to GitHub releases instead.
+/main.js
+*.map
+
+# Environment / secrets
+.env
+.env.*
+*.env
+*.key
+*.pem
+
+# Logs
+*.log
+logs/
+
+# Backups / temporary files
+*.bak
+*.backup
+*.tmp
+*.temp
+*.pre-*
+*~
+Thumbs.db
+.DS_Store
+
+# User books and copyrighted reading material
+Books/
+books/
+*.pdf
+*.epub
+*.mobi
+*.azw
+*.azw3
+
+# User reading notes
+Reading Notes/
+ReadingNotes/
+reading-notes-private/
+
+# Obsidian private/user state
+.obsidian/workspace
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Plugin runtime/user data
+data.json
+
+# AI / agent runtime data
+.opencode/node_modules/
+.opencode/logs/
+.opencode/cache/
+.opencode/sessions/
+
+# Miyo local data
+.miyo/
+miyo-data/
+miyo-index/
+
+# Copilot / chat/session exports
+copilot-sessions/
+chat-logs/
+sessions/
+
+# Local test vaults
+test-vault/
+test-vaults/
+demo-vault-private/
+*-clean-test/
+obsidian-ai-reading-companion-clean-test/
+
+# Local release artifacts
+release/
+releases/

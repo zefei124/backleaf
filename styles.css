@@ -1,0 +1,1496 @@
+/* Backleaf Native Chat UI V1 (arc-chat-* classes, the existing prefix).
+   Obsidian CSS variables only; readable in light and dark themes.
+   Accent is used in exactly two places: the left bar of original-text quotes, and Send
+   (plus a faint focus outline on the composer). Everything else is neutral. */
+
+.workspace-leaf-content[data-type="backleaf-chat"] .view-content {
+  padding: 0;
+  overflow: hidden;
+}
+
+.arc-chat-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  font-family: var(--font-interface);
+  color: var(--text-normal);
+  background: var(--background-primary);
+}
+
+.arc-chat-root button.arc-chat-link,
+.arc-chat-root button.arc-chat-pending-dismiss,
+.arc-chat-root button.arc-chat-pending-toggle,
+.arc-chat-root button.arc-chat-previous-item {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  height: auto;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* ---- top bar ---- */
+
+.arc-chat-topbar {
+  flex: 0 0 auto;
+  padding: var(--size-4-3) var(--size-4-4) var(--size-4-2);
+}
+
+.arc-chat-brand {
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+/* ---- discussion header ---- */
+
+.arc-chat-header {
+  flex: 0 0 auto;
+  padding: 0 var(--size-4-4) var(--size-4-3);
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.arc-chat-meta {
+  font-size: var(--font-ui-smaller);
+  color: var(--text-faint);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.arc-chat-topic {
+  margin-top: var(--size-2-2);
+  font-size: 16px;
+  font-weight: var(--font-bold);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.arc-chat-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--size-4-2);
+  margin-top: var(--size-4-2);
+  flex-wrap: wrap;
+}
+
+.arc-chat-actions-left {
+  display: flex;
+  gap: var(--size-4-3);
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.arc-chat-root .arc-chat-link {
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+}
+
+.arc-chat-root .arc-chat-link:hover,
+.arc-chat-root .arc-chat-link.is-open {
+  color: var(--text-normal);
+}
+
+.arc-chat-save-state {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  font-size: var(--font-ui-smaller);
+}
+
+.arc-chat-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-orange);
+  opacity: 0.8;
+}
+
+.arc-chat-unsaved {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  color: var(--text-faint);
+}
+
+.arc-chat-saved {
+  color: var(--color-green);
+}
+
+.arc-chat-root .arc-chat-save-button {
+  font-size: var(--font-ui-smaller);
+  height: auto;
+  padding: 2px var(--size-2-3);
+  color: var(--text-muted);
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  box-shadow: none;
+}
+
+.arc-chat-root .arc-chat-save-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Book text: the only elements with a left bar. */
+.arc-chat-quote,
+.arc-chat-pending {
+  border-left: 3px solid var(--interactive-accent);
+  background: color-mix(in srgb, var(--interactive-accent) 8%, var(--background-primary));
+  border-radius: 0 var(--radius-s) var(--radius-s) 0;
+}
+
+.arc-chat-quote {
+  margin-top: var(--size-4-2);
+  padding: var(--size-4-2) var(--size-4-3);
+  font-family: var(--font-text);
+  font-size: var(--font-ui-small);
+  line-height: 1.7;
+  max-height: 30vh;
+  overflow-y: auto;
+  overflow-wrap: anywhere;
+}
+
+/* ---- previous discussions ---- */
+.arc-chat-saved-history {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: visible;
+  margin: var(--size-4-2) 0;
+  padding: var(--size-4-3);
+  background: var(--background-secondary);
+  border-radius: var(--radius-m);
+}
+
+.arc-chat-root.is-saved-detail .arc-chat-messages {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.arc-chat-saved-history-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--size-4-2);
+  margin-bottom: var(--size-4-2);
+  color: var(--text-muted);
+}
+.arc-chat-saved-readonly,
+.arc-chat-saved-turn,
+.arc-chat-saved-understanding { margin-top: var(--size-4-2); color: var(--text-muted); }
+.arc-chat-saved-detail .arc-chat-topic { font-weight: var(--font-semibold); color: var(--text-normal); }
+
+/* Saved discussion detail: a compact reading-note layout. */
+.backleaf-detail-header,
+.backleaf-detail-actions,
+.backleaf-detail-understanding-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--size-4-2);
+}
+
+.backleaf-detail-header {
+  min-height: 40px;
+  flex-wrap: wrap;
+  min-width: 0;
+  padding-bottom: var(--size-4-2);
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.backleaf-detail-header > * {
+  min-width: 0;
+}
+
+.backleaf-detail-page {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.arc-chat-root.is-saved-detail .backleaf-detail-page {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.backleaf-detail-readonly,
+.backleaf-detail-label,
+.backleaf-detail-quote-label {
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+}
+
+.backleaf-detail-source {
+  display: grid;
+  gap: var(--size-2-1);
+  padding: var(--size-4-3) 0 var(--size-4-4);
+}
+
+.backleaf-detail-source-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  min-width: 0;
+  gap: 0 var(--size-2-2);
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+}
+
+.backleaf-detail-book {
+  color: inherit;
+}
+
+.backleaf-detail-chapter {
+  color: inherit;
+}
+
+.backleaf-detail-chapter::before {
+  content: '·';
+  margin-right: var(--size-2-2);
+  color: var(--text-faint);
+}
+
+.backleaf-detail-topic {
+  min-width: 0;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  color: var(--text-normal);
+  font-size: 1.15em;
+  font-weight: var(--font-semibold);
+  line-height: 1.35;
+}
+
+.backleaf-detail-quote {
+  margin: 0 0 var(--size-4-4);
+  padding: var(--size-4-3) var(--size-4-3);
+  border-left: 3px solid color-mix(in srgb, var(--interactive-accent) 65%, var(--background-modifier-border));
+  border-radius: var(--radius-s);
+  background: color-mix(in srgb, var(--interactive-accent) 7%, var(--background-secondary));
+}
+
+.backleaf-detail-quote-text,
+.backleaf-detail-question-text,
+.backleaf-detail-message-content,
+.backleaf-detail-understanding-text {
+  color: var(--text-normal);
+  line-height: 1.68;
+  white-space: pre-wrap;
+}
+
+.backleaf-detail-quote-text { margin-top: var(--size-2-1); }
+
+.backleaf-detail-question,
+.backleaf-detail-ai,
+.backleaf-detail-understanding {
+  margin-bottom: var(--size-4-5);
+}
+
+.backleaf-detail-question-text { margin-top: var(--size-2-1); font-size: 1.08em; font-weight: var(--font-semibold); line-height: 1.5; }
+.backleaf-detail-message-content { margin-top: var(--size-2-2); font-size: var(--font-ui-small); }
+.backleaf-detail-message + .backleaf-detail-message { margin-top: var(--size-4-3); }
+.backleaf-detail-ai > .backleaf-detail-message:first-of-type .backleaf-detail-message-content { margin-top: var(--size-2-1); }
+
+.backleaf-detail-message-content > :first-child { margin-top: 0; }
+.backleaf-detail-message-content > :last-child { margin-bottom: 0; }
+
+.backleaf-detail-message-content p { margin-block: 0 var(--size-2-2); }
+.backleaf-detail-message-content ol,
+.backleaf-detail-message-content ul { margin-block: var(--size-2-3); padding-left: var(--size-4-5); }
+.backleaf-detail-message-content li { margin-block: 0 var(--size-2-1); }
+.backleaf-detail-message-content strong { font-weight: var(--font-semibold); }
+.backleaf-detail-message-content h1,
+.backleaf-detail-message-content h2,
+.backleaf-detail-message-content h3,
+.backleaf-detail-message-content h4,
+.backleaf-detail-message-content h5,
+.backleaf-detail-message-content h6 { margin-block: var(--size-4-2) var(--size-2-2); line-height: 1.35; }
+.backleaf-detail-message-content h1:first-child,
+.backleaf-detail-message-content h2:first-child,
+.backleaf-detail-message-content h3:first-child,
+.backleaf-detail-message-content h4:first-child,
+.backleaf-detail-message-content h5:first-child,
+.backleaf-detail-message-content h6:first-child { margin-top: 0; }
+
+/* Match the live assistant rhythm after Obsidian's markdown-rendered rules. */
+.backleaf-detail-message-content.markdown-rendered p {
+  margin-block: 0 var(--size-2-2);
+}
+
+.backleaf-detail-message-content.markdown-rendered ul,
+.backleaf-detail-message-content.markdown-rendered ol {
+  margin-block: var(--size-2-3);
+  padding-inline-start: var(--size-4-5);
+}
+
+.backleaf-detail-message-content.markdown-rendered li {
+  margin-block: 0 var(--size-2-1);
+}
+
+.backleaf-detail-message-content.markdown-rendered blockquote {
+  margin-block: var(--size-2-3);
+  padding-block: 0;
+}
+
+.backleaf-detail-message-content.markdown-rendered > * {
+  margin-top: 0;
+  margin-bottom: var(--size-2-2);
+}
+
+.backleaf-detail-message-content.markdown-rendered > *:last-child {
+  margin-bottom: 0;
+}
+
+.backleaf-detail-message-content.markdown-rendered ul,
+.backleaf-detail-message-content.markdown-rendered ol {
+  margin-top: var(--size-2-2);
+  margin-bottom: var(--size-2-2);
+  padding-inline-start: var(--size-4-5);
+}
+
+.backleaf-detail-message-content.markdown-rendered li {
+  margin-top: 0;
+  margin-bottom: var(--size-2-1);
+}
+
+.backleaf-detail-message-content.markdown-rendered blockquote {
+  margin-block: var(--size-2-2);
+  padding-block: 0;
+}
+
+.backleaf-detail-message-content.markdown-rendered ol,
+.backleaf-detail-message-content.markdown-rendered ul {
+  margin-block: var(--size-2-3);
+  padding-inline-start: var(--size-4-5);
+}
+
+.backleaf-detail-message-content.markdown-rendered li {
+  margin-block: 0;
+  padding-block: 0;
+}
+
+.backleaf-detail-message-content.markdown-rendered li + li {
+  margin-top: 0;
+}
+
+.backleaf-detail-message-content.markdown-rendered {
+  white-space: normal;
+}
+
+.backleaf-detail-message-content.markdown-rendered pre,
+.backleaf-detail-message-content.markdown-rendered code {
+  white-space: pre;
+}
+
+/* Isolate Backleaf chat Markdown from Obsidian reading-mode spacing. */
+.backleaf-detail-message-content.markdown-rendered {
+  white-space: normal;
+}
+
+.backleaf-detail-message-content.markdown-rendered p,
+.backleaf-detail-message-content.markdown-rendered ul,
+.backleaf-detail-message-content.markdown-rendered ol,
+.backleaf-detail-message-content.markdown-rendered blockquote,
+.backleaf-detail-message-content.markdown-rendered pre {
+  margin-block: 8px;
+}
+
+.backleaf-detail-message-content.markdown-rendered ul,
+.backleaf-detail-message-content.markdown-rendered ol {
+  padding-inline-start: var(--size-4-5);
+}
+
+.backleaf-detail-message-content.markdown-rendered li {
+  margin-block: 0;
+  line-height: normal;
+}
+
+.backleaf-detail-message-content.markdown-rendered blockquote {
+  padding-block: 0;
+}
+
+.backleaf-detail-message-content.markdown-rendered pre,
+.backleaf-detail-message-content.markdown-rendered code {
+  white-space: pre;
+}
+
+.backleaf-detail-understanding {
+  padding: var(--size-4-3) var(--size-4-3);
+  border: 1px solid color-mix(in srgb, var(--background-modifier-border) 70%, transparent);
+  border-radius: var(--radius-m);
+  background: var(--background-secondary);
+}
+
+.backleaf-detail-understanding-title {
+  color: var(--text-normal);
+  font-weight: var(--font-semibold);
+}
+
+.backleaf-detail-understanding-source {
+  margin-left: auto;
+  padding: 2px var(--size-2-2);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  white-space: nowrap;
+}
+
+.backleaf-detail-understanding-header {
+  column-gap: var(--size-4-3);
+  min-width: 0;
+}
+
+.backleaf-detail-understanding-status {
+  color: var(--text-success);
+  font-size: var(--font-ui-smaller);
+  white-space: nowrap;
+}
+
+.backleaf-detail-understanding-text { margin-top: var(--size-4-2); }
+
+.backleaf-detail-actions {
+  position: static;
+  flex-shrink: 0;
+  margin-top: var(--size-4-2);
+  padding: var(--size-4-3) 0 var(--size-4-4);
+  background: var(--background-primary);
+}
+
+.backleaf-detail-actions .arc-chat-link {
+  color: var(--text-muted);
+}
+
+.backleaf-detail-continue {
+  appearance: none;
+  min-width: 0;
+  padding: var(--size-2-1) var(--size-4-2);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  background: transparent;
+  box-shadow: none;
+  color: var(--text-normal);
+  cursor: pointer;
+}
+
+.backleaf-detail-continue:hover { border-color: var(--interactive-accent); }
+
+@media (max-width: 360px) {
+  .backleaf-detail-header,
+  .backleaf-detail-understanding-header,
+  .backleaf-detail-actions { align-items: flex-start; }
+  .backleaf-detail-understanding-header { flex-wrap: wrap; }
+  .backleaf-detail-understanding-source { margin-left: 0; }
+  .backleaf-detail-actions { flex-wrap: wrap; }
+  .backleaf-detail-actions > * { max-width: 100%; }
+}
+
+.arc-chat-previous-list {
+  flex: 0 0 auto;
+  margin: var(--size-4-2) var(--size-4-4) 0;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.arc-chat-previous-head {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--size-2-3) var(--size-4-3);
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+  background: var(--background-secondary);
+}
+
+.arc-chat-previous-scope {
+  color: var(--text-faint);
+}
+
+.arc-chat-root button.arc-chat-previous-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: var(--size-4-2) var(--size-4-3);
+  border-top: 1px solid var(--background-modifier-border);
+  white-space: normal;
+}
+
+.arc-chat-root button.arc-chat-previous-item:hover {
+  background: var(--background-modifier-hover);
+}
+
+.arc-chat-previous-topic {
+  font-weight: var(--font-bold);
+  font-size: var(--font-ui-small);
+  color: var(--text-normal);
+}
+
+.arc-chat-previous-question {
+  margin-top: 2px;
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+}
+
+.arc-chat-previous-original {
+  margin-top: 2px;
+  font-family: var(--font-text);
+  font-size: var(--font-ui-smaller);
+  color: var(--text-faint);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.arc-chat-previous-foot {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--size-2-2);
+  font-size: var(--font-ui-smaller);
+  color: var(--text-faint);
+}
+
+/* ---- messages ---- */
+
+.arc-chat-messages {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--size-4-3) var(--size-4-4) var(--size-4-4);
+}
+
+.arc-chat-message + .arc-chat-message {
+  margin-top: var(--size-4-4);
+}
+
+.arc-chat-role {
+  font-size: 11px;
+  font-weight: var(--font-bold);
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+  margin-bottom: var(--size-2-2);
+}
+
+.arc-chat-user .arc-chat-body {
+  font-size: 14.5px;
+  font-weight: var(--font-bold);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.arc-chat-assistant .arc-chat-body {
+  font-size: var(--font-text-size);
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.arc-chat-assistant .arc-chat-body > :first-child {
+  margin-top: 0;
+}
+
+.arc-chat-assistant .arc-chat-body > :last-child {
+  margin-bottom: 0;
+}
+
+/* Keep Obsidian Markdown spacing identical in live and saved assistant content. */
+.arc-chat-assistant .arc-chat-body p,
+.backleaf-detail-ai .backleaf-detail-message-content p {
+  margin-block: 0 var(--size-2-2);
+}
+
+.arc-chat-assistant .arc-chat-body ul,
+.arc-chat-assistant .arc-chat-body ol,
+.backleaf-detail-ai .backleaf-detail-message-content ul,
+.backleaf-detail-ai .backleaf-detail-message-content ol {
+  margin-block: var(--size-2-3);
+  padding-left: var(--size-4-5);
+}
+
+.arc-chat-assistant .arc-chat-body li,
+.backleaf-detail-ai .backleaf-detail-message-content li {
+  margin-block: 0 var(--size-2-1);
+}
+
+.arc-chat-assistant .arc-chat-body blockquote,
+.backleaf-detail-ai .backleaf-detail-message-content blockquote {
+  margin-block: var(--size-2-3);
+  padding-block: 0;
+}
+
+.arc-chat-assistant .arc-chat-body pre,
+.arc-chat-assistant .arc-chat-body table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.arc-chat-summary {
+  background: var(--background-secondary);
+  border-radius: var(--radius-m);
+  padding: var(--size-4-2) var(--size-4-3);
+  font-size: 0.93em;
+}
+
+.arc-chat-pending.arc-chat-message .arc-chat-body {
+  color: var(--text-muted);
+}
+
+.arc-chat-status,
+.arc-chat-truncated,
+.arc-chat-notice,
+.arc-chat-hint {
+  margin-top: var(--size-4-2);
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+}
+
+.arc-chat-status {
+  display: flex;
+  gap: var(--size-4-2);
+  align-items: center;
+}
+
+.arc-chat-error {
+  margin-top: var(--size-4-3);
+  padding: var(--size-4-2) var(--size-4-3);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  font-size: var(--font-ui-small);
+  color: var(--text-muted);
+}
+
+.arc-chat-error .arc-chat-link {
+  margin-top: var(--size-2-2);
+}
+
+.arc-chat-hint {
+  margin-top: 30%;
+  text-align: center;
+}
+
+/* Empty state: minimal. */
+.arc-chat-empty {
+  margin-top: 30%;
+  padding: 0 var(--size-2-2);
+}
+
+.arc-chat-empty-title {
+  font-size: 15px;
+  font-weight: var(--font-bold);
+}
+
+.arc-chat-empty-body {
+  margin-top: var(--size-2-3);
+  font-size: var(--font-ui-small);
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.arc-chat-empty-note {
+  margin-top: var(--size-4-2);
+  font-size: var(--font-ui-smaller);
+  color: var(--text-faint);
+}
+
+/* Bottom panel of a discussion (save results today; room for later panels). */
+.arc-chat-footer {
+  margin-top: var(--size-4-4);
+  text-align: center;
+  font-size: var(--font-ui-smaller);
+  color: var(--text-faint);
+}
+
+.arc-chat-save-status,
+.arc-chat-save-detail {
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+
+.arc-chat-save-detail {
+  margin-top: var(--size-2-2);
+  color: var(--text-faint);
+}
+
+.arc-chat-save-topic {
+  display: flex;
+  gap: var(--size-2-3);
+  margin-top: var(--size-4-2);
+}
+
+.arc-chat-save-topic input {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* ---- composer ---- */
+
+.arc-chat-composer-area {
+  flex: 0 0 auto;
+  padding: var(--size-4-3) var(--size-4-4) var(--size-4-2);
+  border-top: 1px solid var(--background-modifier-border);
+}
+
+.arc-chat-root.is-saved-detail .arc-chat-composer-area {
+  padding-top: var(--size-4-2);
+}
+
+/* Understanding Panel: one neutral closing step between saved content and composer. */
+.backleaf-understanding-panel,
+.backleaf-understanding-card {
+  position: relative;
+  margin: var(--size-4-3) var(--size-4-4) 0;
+  padding: var(--size-4-3);
+  background: var(--background-secondary);
+  border: 0;
+  border-radius: 10px;
+  color: var(--text-normal);
+}
+
+.backleaf-understanding-title {
+  color: var(--text-normal);
+  font-size: var(--font-ui-medium);
+  font-weight: 600;
+}
+
+.backleaf-understanding-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--size-4-2);
+}
+
+.backleaf-understanding-helper,
+.backleaf-understanding-draft-label,
+.backleaf-understanding-meta {
+  margin-top: var(--size-4-1);
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+
+.backleaf-understanding-panel-header .backleaf-understanding-draft-label {
+  margin-top: 0;
+  padding: 1px var(--size-2-2);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  white-space: nowrap;
+}
+
+.backleaf-understanding-textarea {
+  display: block;
+  width: 100%;
+  min-height: 76px;
+  box-sizing: border-box;
+  margin-top: var(--size-4-2);
+  padding: var(--size-4-2);
+  resize: none;
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+  color: var(--text-normal);
+}
+
+.backleaf-understanding-textarea:focus {
+  border-color: var(--background-modifier-border-focus);
+  box-shadow: 0 0 0 1px var(--background-modifier-border-focus);
+}
+
+.workspace-leaf-content[data-type="backleaf-chat"] button.backleaf-understanding-ai-action,
+.workspace-leaf-content[data-type="backleaf-chat"] button.backleaf-understanding-skip,
+.workspace-leaf-content[data-type="backleaf-chat"] button.backleaf-understanding-edit {
+  appearance: none;
+  height: auto;
+  min-height: 0;
+  min-width: 0;
+  width: auto;
+  margin-top: var(--size-4-2);
+  padding: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+  font: inherit;
+  font-size: var(--font-ui-smaller);
+  font-weight: normal;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.workspace-leaf-content[data-type="backleaf-chat"] button.backleaf-understanding-ai-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  color: var(--text-muted);
+}
+
+.workspace-leaf-content[data-type="backleaf-chat"] button.backleaf-understanding-skip {
+  margin-top: 0;
+  color: var(--text-faint);
+}
+
+.workspace-leaf-content[data-type="backleaf-chat"] button.backleaf-understanding-ai-action:hover {
+  color: var(--text-normal);
+  text-decoration: none;
+}
+
+.workspace-leaf-content[data-type="backleaf-chat"] button.backleaf-understanding-skip:hover {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.backleaf-understanding-footer {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: flex-end;
+  column-gap: var(--size-4-3);
+  row-gap: var(--size-4-2);
+  width: 100%;
+  margin-top: var(--size-4-2);
+  min-width: 0;
+}
+
+.backleaf-understanding-skip {
+  grid-column: 1;
+}
+
+.backleaf-understanding-save-group {
+  display: grid;
+  grid-column: 2;
+  grid-template-rows: auto auto;
+  justify-items: end;
+  gap: var(--size-4-1);
+  width: 100%;
+  min-width: 0;
+}
+
+.backleaf-understanding-save-label,
+.backleaf-understanding-hint {
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+}
+
+.backleaf-understanding-save-label {
+  pointer-events: none;
+  text-decoration: none;
+}
+
+.backleaf-understanding-save-buttons {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--size-4-2);
+  width: 100%;
+  max-width: 260px;
+  min-width: 0;
+}
+
+.workspace-leaf-content[data-type="backleaf-chat"] .backleaf-understanding-save-buttons .backleaf-understanding-save-button {
+  appearance: none;
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  height: 30px;
+  min-height: 0;
+  min-width: 0;
+  padding: 0 var(--size-2-2);
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 7px;
+  box-shadow: none;
+  color: var(--text-normal);
+  font: inherit;
+  font-family: inherit;
+  font-size: var(--font-ui-smaller);
+  font-weight: normal;
+  line-height: normal;
+  white-space: nowrap;
+  overflow: visible;
+}
+
+.workspace-leaf-content[data-type="backleaf-chat"] .backleaf-understanding-save-buttons .backleaf-understanding-save-button:hover:not(:disabled) {
+  background: var(--background-modifier-hover);
+}
+
+.workspace-leaf-content[data-type="backleaf-chat"] .backleaf-understanding-save-buttons .backleaf-understanding-save-button:disabled {
+  opacity: 1;
+  background: transparent;
+  border-color: var(--background-modifier-border);
+  color: var(--text-faint);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.backleaf-understanding-hint {
+  margin-top: var(--size-4-1);
+  text-align: right;
+}
+
+.backleaf-understanding-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--size-4-2);
+  min-width: 0;
+}
+
+.backleaf-understanding-card-header-left {
+  min-width: 0;
+}
+
+.workspace-leaf-content[data-type="backleaf-chat"] button.backleaf-understanding-edit {
+  appearance: none;
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  height: auto;
+  min-height: 0;
+  min-width: 0;
+  width: auto;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: var(--font-ui-smaller);
+  cursor: pointer;
+}
+
+.workspace-leaf-content[data-type="backleaf-chat"] button.backleaf-understanding-edit:hover {
+  color: var(--text-normal);
+  text-decoration: underline;
+}
+
+.backleaf-understanding-body {
+  margin-top: var(--size-4-2);
+  white-space: pre-wrap;
+}
+
+.backleaf-understanding-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--size-4-2);
+}
+
+.backleaf-understanding-status.is-resolved { color: var(--color-green); }
+.backleaf-understanding-status.is-unresolved { color: var(--color-orange); }
+
+.backleaf-understanding-skipped {
+  margin: var(--size-4-3) var(--size-4-4) 0;
+  padding: var(--size-4-2);
+  border: 1px dashed var(--background-modifier-border);
+  border-radius: 8px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.backleaf-understanding-skipped:hover {
+  background: var(--background-modifier-hover);
+}
+
+@media (max-width: 360px) {
+  .backleaf-understanding-save-group {
+    grid-column: 1 / -1;
+  }
+}
+
+.arc-chat-composer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-2-3);
+  padding: var(--size-4-2);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-l);
+  background: var(--background-primary);
+}
+
+.arc-chat-composer:focus-within {
+  border-color: color-mix(in srgb, var(--interactive-accent) 45%, var(--background-modifier-border));
+}
+
+.arc-chat-pending {
+  padding: var(--size-2-3) var(--size-4-2);
+}
+
+.arc-chat-pending-head {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--size-4-2);
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.arc-chat-root .arc-chat-pending-dismiss,
+.arc-chat-root .arc-chat-pending-toggle {
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.arc-chat-root .arc-chat-pending-dismiss:hover,
+.arc-chat-root .arc-chat-pending-toggle:hover {
+  color: var(--text-muted);
+}
+
+.arc-chat-pending-text {
+  margin-top: var(--size-2-2);
+  font-family: var(--font-text);
+  font-size: var(--font-ui-small);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+/* Expanded long passages scroll inside a bounded box, never squeezing the input. */
+.arc-chat-pending-text.is-expanded {
+  display: block;
+  -webkit-line-clamp: unset;
+  max-height: 8.5em;
+  overflow-y: auto;
+}
+
+.arc-chat-pending-toggle {
+  margin-top: 2px;
+}
+
+.arc-chat-root textarea.arc-chat-input {
+  width: 100%;
+  min-height: 84px;
+  max-height: 240px;
+  field-sizing: content;
+  resize: none;
+  overflow-y: auto;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  padding: var(--size-2-2);
+  font-family: var(--font-interface);
+  font-size: var(--font-ui-medium);
+  line-height: 1.6;
+}
+
+.arc-chat-root.is-saved-detail textarea.arc-chat-input {
+  min-height: 52px;
+  max-height: 120px;
+  padding-block: var(--size-2-1);
+}
+
+.arc-chat-root.is-saved-detail .arc-chat-composer {
+  gap: var(--size-2-2);
+  padding: var(--size-4-2);
+}
+
+.arc-chat-root textarea.arc-chat-input:focus {
+  box-shadow: none;
+}
+
+.arc-chat-composer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--size-4-2);
+}
+
+.arc-chat-send-hint {
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.arc-chat-root button.arc-chat-send {
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  flex: 0 0 auto;
+}
+
+.arc-chat-root button.arc-chat-send:disabled {
+  background: var(--background-secondary);
+  color: var(--text-faint);
+  box-shadow: none;
+  cursor: default;
+}
+
+.arc-chat-privacy {
+  margin-top: var(--size-2-3);
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.arc-chat-root .arc-chat-privacy .arc-chat-link {
+  font-size: 11px;
+  color: var(--text-faint);
+  text-decoration: underline;
+}
+
+/* ---- Current Discussion Highlight (PDF page overlay) ----
+   A Backleaf-owned layer inside the PDF page element: it marks the passage currently
+   being discussed. pointer-events: none keeps every click, drag and double-click going
+   to the PDF text layer underneath. Accent-tinted like the book-text quote bar. */
+
+.arc-chat-discussion-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.arc-chat-discussion-rect {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--interactive-accent) 16%, transparent);
+  mix-blend-mode: var(--highlight-mix-blend-mode, multiply);
+}
+
+.backleaf-saved-discussion-rect {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--interactive-accent) 9%, transparent);
+  mix-blend-mode: var(--highlight-mix-blend-mode, multiply);
+}
+
+.backleaf-saved-discussion-marker {
+  appearance: none;
+  position: absolute;
+  z-index: 2;
+  width: 16px;
+  height: 16px;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+  padding: 0;
+  border: 1px solid var(--interactive-accent);
+  border-radius: 50%;
+  background: var(--background-primary);
+  color: var(--interactive-accent);
+  box-shadow: none;
+  font: inherit;
+  cursor: pointer;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+}
+
+.backleaf-saved-discussion-marker::after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 5px;
+  margin: 4px auto;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ---- Backleaf Thought Tree View MVP ---- */
+
+.arc-tree-root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-4-3);
+  min-width: 0;
+  padding: var(--size-4-4);
+  overflow-x: hidden;
+  font-family: var(--font-interface);
+  font-size: var(--font-ui-small);
+  color: var(--text-normal);
+}
+
+.arc-tree-title {
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.arc-tree-book {
+  font-size: 18px;
+  font-weight: var(--font-bold);
+  color: var(--text-normal);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.arc-tree-file,
+.arc-tree-empty {
+  color: var(--text-muted);
+}
+
+.arc-tree-root button.arc-tree-toggle,
+.arc-tree-root button.arc-tree-action {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  text-align: left;
+  white-space: normal;
+  background: none;
+  border: none;
+  border-radius: var(--radius-s);
+  box-shadow: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.arc-tree-root button.arc-tree-toggle:hover {
+  color: var(--text-normal);
+  background: transparent;
+}
+
+.arc-tree-root button.arc-tree-chapter-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: var(--size-4-2);
+  padding: var(--size-4-3) 0 var(--size-4-2);
+  border-bottom: 1px solid var(--background-modifier-border);
+  font-size: 15px;
+  font-weight: var(--font-semibold);
+  line-height: 1.35;
+  color: var(--text-normal);
+}
+
+.arc-tree-chapter-label {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow-wrap: anywhere;
+}
+
+.arc-tree-chapter-count {
+  flex: 0 0 auto;
+  margin-left: auto;
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-normal);
+  color: var(--text-faint);
+}
+
+.arc-tree-thread {
+  min-width: 0;
+  border-radius: var(--radius-s);
+}
+
+.arc-tree-thread.is-collapsed {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.arc-tree-thread.is-collapsed:hover {
+  background: var(--background-modifier-hover);
+}
+
+.arc-tree-thread.is-expanded {
+  padding: var(--size-4-4);
+  background: var(--background-secondary);
+  border: 0;
+  box-shadow: none;
+}
+
+.arc-tree-thread-row {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+  padding: var(--size-2-3) var(--size-2-2);
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: var(--radius-s);
+  box-shadow: none;
+  color: inherit;
+  font: inherit;
+  white-space: normal;
+  cursor: pointer;
+}
+
+.arc-tree-thread.is-expanded > .arc-tree-thread-row {
+  padding: 0;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.arc-tree-thread-row:focus-visible {
+  outline: 2px solid var(--background-modifier-border);
+  outline-offset: 2px;
+}
+
+.arc-tree-thread-title {
+  font-size: 13.5px;
+  font-weight: var(--font-semibold);
+  line-height: 1.45;
+  color: var(--text-normal);
+  overflow-wrap: anywhere;
+}
+
+.arc-tree-thread-summary {
+  display: block;
+  gap: var(--size-2-2);
+  min-width: 0;
+  margin-top: 2px;
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: var(--text-muted);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.arc-tree-ai-chip {
+  display: inline;
+  color: var(--text-faint);
+}
+
+.arc-tree-ai-chip::after {
+  content: " ";
+}
+
+.arc-tree-summary-text {
+  display: inline;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.arc-tree-chapters,
+.arc-tree-thread-list,
+.arc-tree-children {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-2-3);
+}
+
+.arc-tree-node {
+  min-width: 0;
+}
+
+.arc-tree-node.is-nested {
+  margin-left: var(--size-4-3);
+  padding-left: var(--size-4-3);
+  border-left: 1px solid var(--background-modifier-border);
+}
+
+.arc-tree-node-label {
+  min-width: 0;
+  color: var(--text-normal);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.arc-tree-role-question > .arc-tree-node-label,
+.arc-tree-role-user > .arc-tree-node-label {
+  font-size: var(--font-ui-small);
+  font-weight: var(--font-semibold);
+}
+
+.arc-tree-role-ai > .arc-tree-node-label {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.arc-tree-node-body {
+  margin-top: var(--size-2-2);
+  color: var(--text-muted);
+  font-size: 12.5px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.arc-tree-markdown-body > :first-child {
+  margin-top: 0;
+}
+
+.arc-tree-markdown-body > :last-child {
+  margin-bottom: 0;
+}
+
+.arc-tree-markdown-body ul,
+.arc-tree-markdown-body ol {
+  padding-inline-start: var(--size-4-5);
+}
+
+.arc-tree-markdown-body blockquote {
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+.arc-tree-node-body.is-preview {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.arc-tree-original {
+  margin-top: var(--size-4-4);
+}
+
+.arc-tree-original-label,
+.arc-tree-chain-title {
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-semibold);
+  color: var(--text-faint);
+}
+
+.arc-tree-original-body {
+  margin-top: var(--size-2-2);
+  padding: var(--size-4-2) var(--size-4-3);
+  border-left: 3px solid var(--interactive-accent);
+  border-radius: 0 var(--radius-s) var(--radius-s) 0;
+  background: color-mix(in srgb, var(--interactive-accent) 8%, var(--background-primary));
+  font-family: var(--font-text);
+  font-size: var(--font-ui-small);
+  line-height: 1.7;
+  color: var(--text-normal);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.arc-tree-chain-title {
+  margin-top: var(--size-4-4);
+  margin-bottom: var(--size-2-1);
+}
+
+.arc-tree-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-4-3);
+  margin-top: var(--size-4-4);
+}
+
+.arc-tree-root button.arc-tree-action {
+  height: auto;
+  min-height: 0;
+  width: auto;
+  padding: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: var(--font-ui-smaller);
+  white-space: normal;
+  cursor: pointer;
+}
+
+.arc-tree-root button.arc-tree-action:hover {
+  color: var(--text-normal);
+  background: transparent;
+}

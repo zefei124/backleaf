@@ -1,0 +1,9 @@
+{
+  "id": "backleaf",
+  "name": "Backleaf",
+  "version": "1.2.0",
+  "minAppVersion": "1.11.4",
+  "description": "Discuss PDF selections with AI and save structured reading notes.",
+  "author": "泽霏zefei",
+  "isDesktopOnly": false
+}
