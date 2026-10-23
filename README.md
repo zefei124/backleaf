@@ -2,7 +2,7 @@
 
 Discuss PDF selections with AI and turn useful conversations into structured reading notes.
 
-**English** | [简体中文](README.zh-CN.md)
+**English** | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
 
 Backleaf keeps close reading inside Obsidian: select text in a PDF, ask questions in the built-in chat, save the discussion as Markdown, revisit saved discussions, and return to the source passage.
 
@@ -15,7 +15,7 @@ Backleaf keeps close reading inside Obsidian: select text in a PDF, ask question
 - Reopen saved discussions as read-only history and start a new discussion from the same source.
 - Update saved understanding without overwriting notes changed outside Backleaf.
 - View compatible reading notes as a Thought Tree.
-- Use English or Simplified Chinese interface text according to the Obsidian language.
+- Use English, Simplified Chinese, Japanese, or Korean interface text according to the Obsidian language.
 
 ## Requirements
 

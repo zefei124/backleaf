@@ -1,8 +1,33 @@
+import { translateUi } from '../ui-translations';
 import { isReadingNoteSchemaV1, parseReadingNote } from '../core/thought-tree';
 
 export const THOUGHT_TREE_VIEW_TYPE = 'backleaf-thought-tree';
 
 const TEXT: any = {
+  ja: {
+    title: 'Backleaf 思考ツリー',
+    notReadingNote: '現在のファイルは読書ノートではありません',
+    noFile: 'ファイルが開かれていません',
+    original: '原文',
+    questionChain: '質問の流れ',
+    aiSummary: 'AI の要約',
+    aiAnswer: 'AI の回答',
+    legacyUnderstanding: '旧形式の理解',
+    openSource: 'PDF の原文を開く',
+    questions: '問',
+  },
+  ko: {
+    title: 'Backleaf 생각 트리',
+    notReadingNote: '현재 파일은 독서 노트가 아닙니다',
+    noFile: '열린 파일이 없습니다',
+    original: '원문',
+    questionChain: '질문의 흐름',
+    aiSummary: 'AI 요약',
+    aiAnswer: 'AI 답변',
+    legacyUnderstanding: '이전 형식의 이해 내용',
+    openSource: 'PDF 원문 열기',
+    questions: '질문',
+  },
   en: {
     title: 'Backleaf Thought Tree',
     notReadingNote: 'The current file is not a Reading Note',
@@ -10,6 +35,7 @@ const TEXT: any = {
     original: 'Original',
     questionChain: 'Question chain',
     aiSummary: 'AI Summary',
+    aiAnswer: 'AI Answer',
     legacyUnderstanding: 'Legacy understanding',
     openSource: 'Open PDF source',
     questions: 'Q',
@@ -21,6 +47,7 @@ const TEXT: any = {
     original: '原文',
     questionChain: '问题链',
     aiSummary: 'AI 总结',
+    aiAnswer: 'AI 回答',
     legacyUnderstanding: '旧版理解',
     openSource: '查看 PDF 原文',
     questions: '问',
@@ -28,12 +55,13 @@ const TEXT: any = {
 };
 
 function strings(locale: string) {
-  return TEXT[locale] || TEXT.en;
+  return { ...(TEXT[locale] || TEXT.en), locale };
 }
 
 function nodeLabel(node: any, text: any) {
   if (!node) return '';
   if (node.role === 'original') return text.original;
+  if (node.role === 'ai') return node.summary ? `${text.aiSummary}${text.locale === 'zh-CN' ? '：' : ': '}${node.summary}` : text.aiAnswer;
   return node.displayText || node.text || '';
 }
 
@@ -100,8 +128,8 @@ function findUnderstanding(discussion: any) {
   return value && typeof value === 'object' && value.status ? value : null;
 }
 
-function understandingSourceLabel(source: string) {
-  return ({ user_written: '我写的', ai_drafted_edited: 'AI 起草 · 我改过', ai_drafted_confirmed: 'AI 起草 · 已确认' } as any)[source] || '';
+function understandingSourceLabel(source: string, text: any) {
+  return translateUi(({ user_written: '我写的', ai_drafted_edited: 'AI 起草 · 我改过', ai_drafted_confirmed: 'AI 起草 · 已确认' } as any)[source] || '', text.locale);
 }
 
 function sourceLinkFor(node: any) {
@@ -205,7 +233,7 @@ export function createThoughtTreeViewClass(obsidian: any, plugin: any) {
       const count = Array.isArray(chapter.discussions) ? chapter.discussions.length : 0;
       const button = chapterEl.createEl('button', { cls: ['arc-tree-toggle', 'arc-tree-chapter-header', 'arc-tree-chapter-title'] });
       button.createSpan({ cls: 'arc-tree-chapter-label', text: `${expanded ? '▼' : '▶'} ${title}` });
-      button.createSpan({ cls: 'arc-tree-chapter-count', text: `${count} 条` });
+      button.createSpan({ cls: 'arc-tree-chapter-count', text: translateUi('{n} 条', text.locale).replace('{n}', String(count)) });
       button.addEventListener('click', () => this.toggle(key));
       if (!expanded) return;
       const list = chapterEl.createDiv({ cls: 'arc-tree-thread-list' });
@@ -231,7 +259,7 @@ export function createThoughtTreeViewClass(obsidian: any, plugin: any) {
       const understanding = findUnderstanding(discussion);
       if (!expanded && understanding?.text) {
         const summaryEl = header.createDiv({ cls: ['arc-tree-thread-summary', 'arc-tree-discussion-summary'] });
-        const source = understandingSourceLabel(understanding.source);
+        const source = understandingSourceLabel(understanding.source, text);
         if (source) summaryEl.createSpan({ cls: 'arc-tree-ai-chip', text: source });
         summaryEl.createSpan({ cls: 'arc-tree-summary-text', text: cleanPreview(understanding.text) });
       } else if (!expanded && summary) {
@@ -244,11 +272,11 @@ export function createThoughtTreeViewClass(obsidian: any, plugin: any) {
       if (original) this.renderOriginal(item, original, text);
       if (understanding) {
         const panel = item.createDiv({ cls: 'arc-tree-understanding' });
-        panel.createDiv({ cls: 'arc-tree-understanding-label', text: `我的理解${understandingSourceLabel(understanding.source) ? ` · ${understandingSourceLabel(understanding.source)}` : ''}` });
+        panel.createDiv({ cls: 'arc-tree-understanding-label', text: `${translateUi('我的理解', text.locale)}${understandingSourceLabel(understanding.source, text) ? ` · ${understandingSourceLabel(understanding.source, text)}` : ''}` });
         if (understanding.text) panel.createDiv({ cls: 'arc-tree-understanding-body', text: understanding.text });
-        if (understanding.status === 'resolved') panel.createDiv({ cls: 'arc-tree-understanding-status', text: '已解决' });
-        if (understanding.status === 'unresolved') panel.createDiv({ cls: 'arc-tree-understanding-status', text: '未解决' });
-        if (understanding.status === 'unsummarized') panel.createDiv({ cls: 'arc-tree-understanding-status', text: '未总结' });
+        if (understanding.status === 'resolved') panel.createDiv({ cls: 'arc-tree-understanding-status', text: translateUi('已解决', text.locale) });
+        if (understanding.status === 'unresolved') panel.createDiv({ cls: 'arc-tree-understanding-status', text: translateUi('未解决', text.locale) });
+        if (understanding.status === 'unsummarized') panel.createDiv({ cls: 'arc-tree-understanding-status', text: translateUi('未总结', text.locale) });
       }
       const questionCount = countQuestions(thread);
       item.createDiv({ cls: ['arc-tree-chain-title', 'arc-tree-question-chain-title'], text: `${text.questionChain} · ${questionCount} ${text.questions}` });

@@ -1,6 +1,6 @@
 {
 	"name": "backleaf",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"description": "Backleaf: discuss PDF selections in Obsidian with your own AI provider (BYOK) and keep structured reading notes.",
 	"main": "main.js",
 	"private": true,

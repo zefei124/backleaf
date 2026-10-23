@@ -269,6 +269,39 @@ const TREE_VIEW = "backleaf-thought-tree";
 
 const nativeEnv = (extra = {}) => ({ nativeUi: true, secrets: { "deepseek-api-key": FAKE_KEY }, ...extra });
 
+for (const [locale, normalized, title, modelLabel, returnLabel, treeTitle] of [
+  ['ja-JP', 'ja', 'Backleaf チャット（ベータ）', 'モデル', '現在の対話に戻る', 'Backleaf 思考ツリー'],
+  ['ko-KR', 'ko', 'Backleaf 채팅 (베타)', '모델', '현재 대화로 돌아가기', 'Backleaf 생각 트리'],
+]) {
+  test(`${locale}: localized commands, chat, settings, history and tree render from the built bundle`, async () => {
+    await runPlugin(BUILT_MAIN, nativeEnv({ locale }), async ({ env, plugin }) => {
+      assert.equal(plugin.getLocale(), normalized);
+      await openWithSelection(env);
+      const view = viewOf(env);
+      assert.equal(view.getDisplayText(), title);
+      assert.ok(!view.contentEl.allText.includes('请选择'));
+      env.record.settingTabs[0].display();
+      assert.ok(env.record.settings.some(setting => setting.name === modelLabel));
+      view.openSavedTarget({ key: 'localized-history', discussions: [{
+        notePath: 'Books/Reading Notes/Book.md', bookTitle: 'Book', topic: 'Saved topic',
+        sourceLink: 'Books/Book.pdf#page=1&selection=1,0,1,9', originalText: 'Source text',
+        firstQuestion: 'Question', dialogue: [{ role: 'ai', text: 'Answer' }],
+        understanding: { text: 'My own words', source: 'user_written', status: 'resolved' },
+      }] });
+      view.contentEl.find(el => el.hasClass('arc-chat-previous-item')).trigger('click');
+      const detail = view.contentEl.find(el => el.hasClass('backleaf-detail-page'));
+      assert.ok(detail.allText.includes(returnLabel));
+      assert.ok(detail.allText.includes('My own words'), 'user content remains unchanged');
+      assert.ok(!detail.allText.includes('历史讨论'));
+      assert.ok(!detail.allText.includes('我的理解'));
+      await plugin.activateThoughtTreeView();
+      await flush();
+      assert.equal(treeViewOf(env).getDisplayText(), treeTitle);
+      assert.equal(env.record.requests.length, 0, 'changing UI language makes no API requests');
+    });
+  });
+}
+
 function reply(content, finishReason = "stop") {
   return { status: 200, text: JSON.stringify({ choices: [{ message: { content }, finish_reason: finishReason }] }) };
 }

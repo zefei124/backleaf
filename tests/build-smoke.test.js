@@ -26,13 +26,14 @@ test("root manifest.json has the Backleaf identity and release metadata", () => 
     ...read("plugin/ai-reading-companion/manifest.json"),
     id: "backleaf",
     name: "Backleaf",
-    version: "1.2.0",
+    version: "1.2.1",
     minAppVersion: "1.11.4",
     description: "Discuss PDF selections with AI and save structured reading notes.",
   });
   assert.deepEqual(read("versions.json"), {
     "1.0.0": "1.0.0",
     "1.1.0": "1.11.4",
+    "1.2.0": "1.11.4",
     [manifest.version]: manifest.minAppVersion,
   });
   assert.equal(read("package.json").version, manifest.version);

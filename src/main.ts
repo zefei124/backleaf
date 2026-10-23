@@ -1,3 +1,4 @@
+import { translateUi } from './ui-translations';
 import {
   Plugin,
   Notice,
@@ -45,6 +46,26 @@ declare module 'obsidian' {
 }
 
 const UI_TEXT: any = {
+  ja: {
+    commandSendSelection: 'Backleaf：PDF の選択範囲を Copilot に送信',
+    notPdf: '現在のファイルは PDF ではありません。',
+    noSelection: 'まず PDF の文章を選択してください。',
+    copilotMissing: 'Copilot プラグインが見つかりません。インストールして有効にしてください。',
+    copilotSetSelectionUnavailable: 'Copilot の互換性の問題：setSelectionContext を利用できません。',
+    copilotActivateAgentUnavailable: 'Copilot の互換性の問題：activateAgentView を利用できません。',
+    sendFailed: '送信できませんでした：',
+    openSource: '原文を開く',
+  },
+  ko: {
+    commandSendSelection: 'Backleaf: PDF 선택 영역을 Copilot으로 전송',
+    notPdf: '현재 파일은 PDF가 아닙니다.',
+    noSelection: '먼저 PDF에서 글을 선택하세요.',
+    copilotMissing: 'Copilot 플러그인을 찾을 수 없습니다. 먼저 설치하고 활성화하세요.',
+    copilotSetSelectionUnavailable: 'Copilot 호환성 문제: setSelectionContext를 사용할 수 없습니다.',
+    copilotActivateAgentUnavailable: 'Copilot 호환성 문제: activateAgentView를 사용할 수 없습니다.',
+    sendFailed: '전송 실패: ',
+    openSource: '원문 열기',
+  },
   en: {
     commandSendSelection: 'Backleaf: Send PDF selection to Copilot',
     notPdf: 'The current file is not a PDF.',
@@ -68,8 +89,11 @@ const UI_TEXT: any = {
 };
 
 function normalizeLocale(value: any) {
-  const locale = String(value == null ? '' : value).toLowerCase();
-  return locale.startsWith('zh') ? 'zh-CN' : 'en';
+  const locale = String(value == null ? '' : value).trim().toLowerCase();
+  if (locale.startsWith('zh')) return 'zh-CN';
+  if (locale.startsWith('ja')) return 'ja';
+  if (locale.startsWith('ko')) return 'ko';
+  return 'en';
 }
 
 export default class Backleaf extends Plugin {
@@ -108,7 +132,7 @@ export default class Backleaf extends Plugin {
     await this.initNativeChat();
     this.addCommand({
       id: 'generate-thought-tree-archive',
-      name: 'Generate / Update Thought Tree Archive',
+      name: translateUi('Generate / Update Thought Tree Archive', this.getLocale()),
       callback: () => this.generateThoughtTreeArchive(),
     });
   }
@@ -177,7 +201,7 @@ export default class Backleaf extends Plugin {
       // The ribbon and the command only open / focus the panel. New selections are
       // captured by B′ in the composer (docs/design-freeze-auto-selection-highlight.md).
       this.addRibbonIcon('messages-square', text.ribbon, () => this.activateReadingChatView());
-      this.addRibbonIcon('list-tree', 'Backleaf Thought Tree', () => this.activateThoughtTreeView());
+      this.addRibbonIcon('list-tree', translateUi('Backleaf Thought Tree', this.getLocale()), () => this.activateThoughtTreeView());
       this.addCommand({
         // Id kept so existing user hotkeys keep working.
         id: 'discuss-pdf-selection-native-chat',
@@ -186,7 +210,7 @@ export default class Backleaf extends Plugin {
       });
       this.addCommand({
         id: 'open-backleaf-thought-tree',
-        name: 'Open Backleaf Thought Tree',
+        name: translateUi('Open Backleaf Thought Tree', this.getLocale()),
         callback: () => this.activateThoughtTreeView(),
       });
       const SettingTabClass: any = createSettingsTabClass(api, this);
@@ -260,12 +284,12 @@ export default class Backleaf extends Plugin {
     try {
       current = await service.listPdfHighlightTargets(file.path);
     } catch (e) {
-      new Notice('历史讨论已变化，请重新打开 PDF。');
+      new Notice(translateUi('历史讨论已变化，请重新打开 PDF。', this.getLocale()));
       return;
     }
     const fresh = current.find((item) => item?.key === target.key);
     if (!fresh) {
-      new Notice('历史讨论已变化，请重新打开 PDF。');
+      new Notice(translateUi('历史讨论已变化，请重新打开 PDF。', this.getLocale()));
       return;
     }
     const leaves: any[] = this.app.workspace.getLeavesOfType?.('backleaf-chat') ?? [];
@@ -559,7 +583,7 @@ export default class Backleaf extends Plugin {
         normalizePath,
       });
       const outcome = await service.generateForActiveFile();
-      new Notice(outcome.message || (outcome.status === 'updated' ? '思考树存档已更新。' : '思考树存档已生成。'));
+      new Notice(translateUi(outcome.message || (outcome.status === 'updated' ? '思考树存档已更新。' : '思考树存档已生成。'), this.getLocale()));
     } catch (e: any) {
       new Notice(e && e.message ? e.message : String(e));
     }

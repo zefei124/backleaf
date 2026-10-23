@@ -2,6 +2,7 @@
 // with Obsidian's SecretComponent; only the secret's name is saved in plugin data.
 
 import { strings } from './messages';
+import { translateUi } from '../ui-translations';
 import { parseStoredSettings } from './settings';
 import { getPreset, DEFAULT_PRESET_ID } from '../provider/presets';
 
@@ -82,7 +83,7 @@ export function createSettingsTabClass(obsidian: any, plugin: any) {
     async change(key: string, value: string) {
       const text = strings(plugin.getLocale()).settings;
       const result = await plugin.updateNativeChatSetting(key, value);
-      if (this.statusEl) this.statusEl.setText(result.error ? `${text.invalidValue}${result.error.message}` : '');
+      if (this.statusEl) this.statusEl.setText(result.error ? `${text.invalidValue}${translateUi(result.error.message, plugin.getLocale())}` : '');
     }
   };
 }

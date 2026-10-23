@@ -1,5 +1,22 @@
 # Changelog
 
+# v1.2.1
+
+## Added
+
+- Japanese and Korean interfaces and README translations.
+- Localized history, understanding, settings, errors and Thought Tree labels.
+
+## Fixed
+
+- Understanding status buttons wrap in narrow sidebars.
+- Thought Tree AI labels follow the interface language.
+
+## Verification
+
+- Japanese and Korean views inspected in isolated Obsidian 1.13.7 with synthetic content.
+- No live AI requests were used for localization acceptance.
+
 # v1.2.0
 
 ## Added

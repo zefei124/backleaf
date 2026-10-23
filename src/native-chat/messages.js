@@ -1,10 +1,12 @@
 "use strict";
 
-// User-facing text for the native chat view and settings (Slice 2c), zh-CN and en.
+// User-facing text for the native chat view and settings: en, zh-CN, ja and ko.
 // Error codes from the provider / chat layers are mapped here; raw provider
 // messages and anything secret are never shown.
 
 const TEXT = {
+  ja: require('./messages.ja'),
+  ko: require('./messages.ko'),
   "zh-CN": {
     ribbon: "打开 Backleaf 对话",
     command: "打开 Backleaf 对话",

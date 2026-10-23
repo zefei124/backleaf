@@ -1,3 +1,4 @@
+import { translateUi } from '../ui-translations';
 // Native reading chat view (Slice 2c; Native Chat UI V1 layout). A thin ItemView that
 // renders the NativeChatController state as a reading-discussion workspace:
 // top bar → discussion header → messages → composer. Obsidian classes are passed in,
@@ -323,18 +324,18 @@ export function createReadingChatViewClass(obsidian: any, plugin: any) {
       if (this.savedDiscussion) {
         const detail = panel;
         const detailHeader = detail.createDiv({ cls: 'backleaf-detail-header' });
-        detailHeader.createEl('button', { cls: 'arc-chat-link', text: '返回当前讨论' }).addEventListener('click', returnToCurrent);
-        detailHeader.createSpan({ cls: 'backleaf-detail-readonly', text: '历史讨论 · 只读' });
+        detailHeader.createEl('button', { cls: 'arc-chat-link', text: translateUi('返回当前讨论', plugin.getLocale()) }).addEventListener('click', returnToCurrent);
+        detailHeader.createSpan({ cls: 'backleaf-detail-readonly', text: translateUi('历史讨论 · 只读', plugin.getLocale()) });
 
         const source = detail.createDiv({ cls: 'backleaf-detail-source' });
         const sourceMeta = source.createDiv({ cls: 'backleaf-detail-source-meta' });
         if (this.savedDiscussion.bookTitle) sourceMeta.createSpan({ cls: 'backleaf-detail-book', text: this.savedDiscussion.bookTitle });
         if (this.savedDiscussion.chapter) sourceMeta.createSpan({ cls: 'backleaf-detail-chapter', text: this.savedDiscussion.chapter });
-        source.createDiv({ cls: 'backleaf-detail-topic', text: this.savedDiscussion.topic || '未命名讨论' });
+        source.createDiv({ cls: 'backleaf-detail-topic', text: this.savedDiscussion.topic || translateUi('未命名讨论', plugin.getLocale()) });
 
         if (this.savedDiscussion.originalText) {
           const quote = detail.createDiv({ cls: 'backleaf-detail-quote' });
-          quote.createDiv({ cls: 'backleaf-detail-quote-label', text: '原文' });
+          quote.createDiv({ cls: 'backleaf-detail-quote-label', text: translateUi('原文', plugin.getLocale()) });
           quote.createDiv({ cls: 'backleaf-detail-quote-text', text: this.savedDiscussion.originalText });
         }
 
@@ -348,7 +349,7 @@ export function createReadingChatViewClass(obsidian: any, plugin: any) {
         for (const turn of turns) {
           const isAi = turn.role === 'assistant';
           const message = conversation.createDiv({ cls: ['arc-chat-message', isAi ? 'arc-chat-assistant' : 'arc-chat-user', 'backleaf-detail-message'] });
-          message.createDiv({ cls: 'arc-chat-role', text: isAi ? 'AI' : '我' });
+          message.createDiv({ cls: 'arc-chat-role', text: isAi ? 'AI' : translateUi('我', plugin.getLocale()) });
           const body = message.createDiv({ cls: ['arc-chat-body', 'backleaf-detail-message-content', 'markdown-rendered'] });
           const markdown = normalizeMarkdown(turn.text);
           const rendered = MarkdownRenderer.render(plugin.app, neutralizeEmbeds(markdown), body, this.savedDiscussion.notePath || '', this.renderComponent);
@@ -358,33 +359,33 @@ export function createReadingChatViewClass(obsidian: any, plugin: any) {
         if (this.savedDiscussion.understanding?.text) {
           const understanding = detail.createDiv({ cls: 'backleaf-detail-understanding' });
           const understandingHeader = understanding.createDiv({ cls: 'backleaf-detail-understanding-header' });
-          understandingHeader.createDiv({ cls: 'backleaf-detail-understanding-title', text: '我的理解' });
+          understandingHeader.createDiv({ cls: 'backleaf-detail-understanding-title', text: translateUi('我的理解', plugin.getLocale()) });
           const understandingSource = this.savedDiscussion.understanding.source;
           if (understandingSource) {
             const sourceLabel = understandingSource === 'user_written'
-              ? '我写的'
+              ? translateUi('我写的', plugin.getLocale())
               : understandingSource === 'ai_drafted_edited'
-                ? 'AI 起草 · 我改过'
+                ? translateUi('AI 起草 · 我改过', plugin.getLocale())
                 : understandingSource === 'ai_drafted_confirmed'
-                  ? 'AI 起草 · 已确认'
+                  ? translateUi('AI 起草 · 已确认', plugin.getLocale())
                   : '';
             if (sourceLabel) understandingHeader.createSpan({ cls: 'backleaf-detail-understanding-source', text: sourceLabel });
           }
           const status = this.savedDiscussion.understandingStatus || this.savedDiscussion.understanding.status;
-          if (status) understandingHeader.createSpan({ cls: 'backleaf-detail-understanding-status', text: status === 'resolved' ? '✓ 想明白了' : status === 'unresolved' ? '○ 还没想透' : '未总结' });
+          if (status) understandingHeader.createSpan({ cls: 'backleaf-detail-understanding-status', text: status === 'resolved' ? translateUi('✓ 想明白了', plugin.getLocale()) : status === 'unresolved' ? translateUi('○ 还没想透', plugin.getLocale()) : translateUi('未总结', plugin.getLocale()) });
           understanding.createDiv({ cls: 'backleaf-detail-understanding-text', text: this.savedDiscussion.understanding.text });
         }
 
         const actions = detail.createDiv({ cls: 'backleaf-detail-actions' });
         if (this.savedDiscussion.sourceLink) {
-          const sourceButton = actions.createEl('button', { cls: 'arc-chat-link', text: '查看原文' });
+          const sourceButton = actions.createEl('button', { cls: 'arc-chat-link', text: translateUi('查看原文', plugin.getLocale()) });
           const discussion = this.savedDiscussion;
           sourceButton.addEventListener('click', () => {
             this.openNote(`[[${discussion.sourceLink}]]`);
             plugin.nativeChat?.captureContextFromSaved?.(discussion);
           });
         }
-        const newChat = actions.createEl('button', { cls: 'backleaf-detail-continue', text: '基于此原文开始新讨论' });
+        const newChat = actions.createEl('button', { cls: 'backleaf-detail-continue', text: translateUi('基于此原文开始新讨论', plugin.getLocale()) });
         newChat.disabled = !(plugin.nativeChat && typeof plugin.nativeChat.startNewFromSaved === 'function');
         newChat.addEventListener('click', () => {
           if (plugin.nativeChat.startNewFromSaved(this.savedDiscussion)) {
@@ -396,10 +397,10 @@ export function createReadingChatViewClass(obsidian: any, plugin: any) {
         });
         return;
       }
-      head?.createEl('button', { cls: 'arc-chat-link', text: '返回当前讨论' }).addEventListener('click', returnToCurrent);
+      head?.createEl('button', { cls: 'arc-chat-link', text: translateUi('返回当前讨论', plugin.getLocale()) }).addEventListener('click', returnToCurrent);
       for (const discussion of this.savedHistory || []) {
         const item = panel.createEl('button', { cls: 'arc-chat-previous-item' });
-        item.createDiv({ cls: 'arc-chat-previous-topic', text: discussion.topic || '未命名讨论' });
+        item.createDiv({ cls: 'arc-chat-previous-topic', text: discussion.topic || translateUi('未命名讨论', plugin.getLocale()) });
         if (discussion.firstQuestion) item.createDiv({ cls: 'arc-chat-previous-question', text: oneLine(discussion.firstQuestion) });
         item.addEventListener('click', () => {
           this.saveConversationSnapshot(plugin.nativeChat.getState?.().conversation || null);
@@ -605,7 +606,7 @@ export function createReadingChatViewClass(obsidian: any, plugin: any) {
       }
       if (this.isSaveFailure(save) && save.message) {
         // The SaveService message is shown in full, never parsed or shortened.
-        panel.createDiv({ cls: 'arc-chat-save-detail', text: `${text.saveErrorDetail}${save.message}` });
+        panel.createDiv({ cls: 'arc-chat-save-detail', text: `${text.saveErrorDetail}${translateUi(save.message, plugin.getLocale())}` });
       }
     }
 
@@ -616,7 +617,7 @@ export function createReadingChatViewClass(obsidian: any, plugin: any) {
       const saved = understanding.saved || Boolean(existing && !this.understandingEditing.has(key));
       if (this.understandingSkipped.has(key) && !this.understandingEditing.has(key) && !existing) {
         const compact = parent.createDiv({ cls: 'backleaf-understanding-skipped', attr: { role: 'button', tabindex: '0' } });
-        compact.createSpan({ text: '+ 写下我的理解' });
+        compact.createSpan({ text: translateUi('+ 写下我的理解', plugin.getLocale()) });
         const open = () => { this.understandingSkipped.delete(key); this.understandingEditing.add(key); this.render(); };
         compact.addEventListener('click', open);
         compact.addEventListener('keydown', (event: KeyboardEvent) => {
@@ -629,23 +630,23 @@ export function createReadingChatViewClass(obsidian: any, plugin: any) {
         const card = parent.createDiv({ cls: 'backleaf-understanding-card' });
         const header = card.createDiv({ cls: 'backleaf-understanding-card-header' });
         const left = header.createDiv({ cls: 'backleaf-understanding-card-header-left' });
-        left.createDiv({ cls: 'backleaf-understanding-title', text: '我的理解' });
-        const source = ({ user_written: '我写的', ai_drafted_edited: 'AI 起草 · 我改过', ai_drafted_confirmed: 'AI 起草 · 已确认' } as any)[value?.source] || '';
-        const status = value?.status === 'resolved' ? '✓ 想明白了' : '○ 还没想透';
+        left.createDiv({ cls: 'backleaf-understanding-title', text: translateUi('我的理解', plugin.getLocale()) });
+        const source = ({ user_written: translateUi('我写的', plugin.getLocale()), ai_drafted_edited: translateUi('AI 起草 · 我改过', plugin.getLocale()), ai_drafted_confirmed: translateUi('AI 起草 · 已确认', plugin.getLocale()) } as any)[value?.source] || '';
+        const status = value?.status === 'resolved' ? translateUi('✓ 想明白了', plugin.getLocale()) : translateUi('○ 还没想透', plugin.getLocale());
         const meta = left.createDiv({ cls: 'backleaf-understanding-meta' });
         if (source) meta.createSpan({ cls: 'backleaf-understanding-source', text: source });
         meta.createSpan({ cls: ['backleaf-understanding-status', value?.status === 'resolved' ? 'is-resolved' : 'is-unresolved'], text: status });
         if (value?.text) card.createDiv({ cls: 'backleaf-understanding-body', text: value.text });
-        const edit = header.createEl('button', { cls: 'backleaf-understanding-edit', text: '编辑' });
+        const edit = header.createEl('button', { cls: 'backleaf-understanding-edit', text: translateUi('编辑', plugin.getLocale()) });
         edit.addEventListener('click', () => { this.understandingEditing.add(key); this.render(); });
         return;
       }
       const panel = parent.createDiv({ cls: 'backleaf-understanding-panel' });
       const header = panel.createDiv({ cls: 'backleaf-understanding-panel-header' });
-      header.createDiv({ cls: 'backleaf-understanding-title', text: '我的理解' });
-      if (understanding.baseline != null) header.createSpan({ cls: 'backleaf-understanding-draft-label', text: 'AI 起草 · 可直接修改' });
-      panel.createDiv({ cls: 'backleaf-understanding-helper', text: '这次讨论之后，你想明白了什么？用一两句话写下来。' });
-      const textarea = panel.createEl('textarea', { cls: 'backleaf-understanding-textarea', attr: { placeholder: '用自己的话写下你的理解…', 'aria-label': '我的理解' } });
+      header.createDiv({ cls: 'backleaf-understanding-title', text: translateUi('我的理解', plugin.getLocale()) });
+      if (understanding.baseline != null) header.createSpan({ cls: 'backleaf-understanding-draft-label', text: translateUi('AI 起草 · 可直接修改', plugin.getLocale()) });
+      panel.createDiv({ cls: 'backleaf-understanding-helper', text: translateUi('这次讨论之后，你想明白了什么？用一两句话写下来。', plugin.getLocale()) });
+      const textarea = panel.createEl('textarea', { cls: 'backleaf-understanding-textarea', attr: { placeholder: translateUi('用自己的话写下你的理解…', plugin.getLocale()), 'aria-label': translateUi('我的理解', plugin.getLocale()) } });
       textarea.value = understanding.text ?? existing?.text ?? '';
       const buttons: any[] = [];
       let hint: any;
@@ -653,8 +654,8 @@ export function createReadingChatViewClass(obsidian: any, plugin: any) {
         const hasText = Boolean(String(textarea.value || '').trim());
         for (const button of buttons) {
           button.disabled = !hasText;
-          button.title = hasText ? '' : '先写一句理解再保存';
-          button.setAttribute?.('aria-label', hasText ? button.dataset?.label : '先写一句理解再保存');
+          button.title = hasText ? '' : translateUi('先写一句理解再保存', plugin.getLocale());
+          button.setAttribute?.('aria-label', hasText ? button.dataset?.label : translateUi('先写一句理解再保存', plugin.getLocale()));
         }
         if (hint) hint.hidden = hasText;
       };
@@ -664,13 +665,13 @@ export function createReadingChatViewClass(obsidian: any, plugin: any) {
       });
       const ai = panel.createEl('button', { cls: 'backleaf-understanding-ai-action' });
       ai.createSpan({ cls: 'backleaf-understanding-ai-icon', text: '✎' });
-      ai.createSpan({ text: understanding.baseline != null ? '重新起草' : '让 AI 起草一版' });
+      ai.createSpan({ text: understanding.baseline != null ? translateUi('重新起草', plugin.getLocale()) : translateUi('让 AI 起草一版', plugin.getLocale()) });
       ai.addEventListener('click', () => { void plugin.nativeChat.draftUnderstanding(conversation); });
       const actions = panel.createDiv({ cls: 'backleaf-understanding-footer' });
-      const skip = actions.createEl('button', { cls: 'backleaf-understanding-skip', text: '跳过' });
+      const skip = actions.createEl('button', { cls: 'backleaf-understanding-skip', text: translateUi('跳过', plugin.getLocale()) });
       skip.addEventListener('click', () => { this.understandingSkipped.add(key); this.understandingEditing.delete(key); this.render(); });
       const group = actions.createDiv({ cls: 'backleaf-understanding-save-group' });
-      group.createSpan({ cls: 'backleaf-understanding-save-label', text: '保存为' });
+      group.createSpan({ cls: 'backleaf-understanding-save-label', text: translateUi('保存为', plugin.getLocale()) });
       const buttonRow = group.createDiv({ cls: 'backleaf-understanding-save-buttons' });
       const createSaveButton = (status: 'unresolved' | 'resolved', label: string, prefix: string) => {
         const button = buttonRow.createEl('button', {
@@ -681,11 +682,11 @@ export function createReadingChatViewClass(obsidian: any, plugin: any) {
         button.dataset.label = label;
         button.addEventListener('click', () => { void plugin.nativeChat.saveUnderstanding(conversation, { text: textarea.value, status }); });
       };
-      createSaveButton('unresolved', '还没想透', '○');
-      createSaveButton('resolved', '想明白了', '✓');
-      hint = panel.createDiv({ cls: 'backleaf-understanding-hint', text: '写一句再保存' });
+      createSaveButton('unresolved', translateUi('还没想透', plugin.getLocale()), '○');
+      createSaveButton('resolved', translateUi('想明白了', plugin.getLocale()), '✓');
+      hint = panel.createDiv({ cls: 'backleaf-understanding-hint', text: translateUi('写一句再保存', plugin.getLocale()) });
       updateInputState();
-      if (understanding.error) panel.createDiv({ cls: 'arc-chat-error', text: understanding.error.message || 'AI 起草失败' });
+      if (understanding.error) panel.createDiv({ cls: 'arc-chat-error', text: translateUi(understanding.error.message, plugin.getLocale()) || translateUi('AI 起草失败', plugin.getLocale()) });
     }
 
     // ---- composer -----------------------------------------------------------------
@@ -866,7 +867,7 @@ export function createReadingChatViewClass(obsidian: any, plugin: any) {
       if (save.status === 'saved') return `${text.savedTo}${save.path}`;
       if (save.status === 'duplicate') return text.saveDuplicate;
       if (save.status !== 'error') return '';
-      if (save.code === 'external-change') return '笔记中的讨论已被修改，请核对后再保存';
+      if (save.code === 'external-change') return translateUi('笔记中的讨论已被修改，请核对后再保存', plugin.getLocale());
       if (save.code === 'missing-topic') return text.saveMissingTopic;
       if (save.code === 'missing-question') return text.saveMissingQuestion;
       if (save.code === 'missing-answer') return text.saveMissingAnswer;

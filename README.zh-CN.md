@@ -2,7 +2,7 @@
 
 用 AI 讨论 PDF 选区，并把有价值的对话保存成结构化读书笔记。
 
-[English](README.md) | **简体中文**
+[English](README.md) | **简体中文** | [日本語](README.ja.md) | [한국어](README.ko.md)
 
 Backleaf 让深度阅读留在 Obsidian 中：选中 PDF 原文、在内置对话界面中提问、把讨论保存为 Markdown、回看历史讨论，并随时返回原文位置。
 
@@ -15,7 +15,7 @@ Backleaf 让深度阅读留在 Obsidian 中：选中 PDF 原文、在内置对�
 - 以只读方式查看历史讨论，也可以基于同一原文开始新讨论。
 - 更新已保存的理解；如果笔记在外部被修改，Backleaf 会拒绝覆盖。
 - 将兼容的读书笔记显示为思考树。
-- 根据 Obsidian 界面语言显示英文或简体中文。
+- 根据 Obsidian 界面语言显示英文、简体中文、日语或韩语。
 
 ## 使用要求
 

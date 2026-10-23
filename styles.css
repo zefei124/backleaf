@@ -902,10 +902,10 @@
   width: 100%;
   max-width: none;
   box-sizing: border-box;
-  height: 30px;
-  min-height: 0;
+  height: auto;
+  min-height: 30px;
   min-width: 0;
-  padding: 0 var(--size-2-2);
+  padding: var(--size-2-1) var(--size-2-2);
   background: var(--background-primary);
   border: 1px solid var(--background-modifier-border);
   border-radius: 7px;
@@ -916,7 +916,8 @@
   font-size: var(--font-ui-smaller);
   font-weight: normal;
   line-height: normal;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
   overflow: visible;
 }
 
