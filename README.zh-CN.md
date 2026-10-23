@@ -1,4 +1,4 @@
-# Backleaf
+# Backleaf 叶间｜AI 阅读伴侣
 
 用 AI 讨论 PDF 选区，并把有价值的对话保存成结构化读书笔记。
 

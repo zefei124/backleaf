@@ -1,4 +1,4 @@
-# Backleaf
+# Backleaf 叶间｜AI 阅读伴侣
 
 Discuss PDF selections with AI and turn useful conversations into structured reading notes.
 
