@@ -66,6 +66,16 @@ API キーは Obsidian SecretStorage から読み取り、設定されたエン�
 
 Backleaf にはクライアント側のテレメトリー、広告、自動更新機構は含まれていません。
 
+## 連絡先
+
+ご質問、ご提案、フィードバックはこちらへお寄せください：[hnyu588@gmail.com](mailto:hnyu588@gmail.com)
+
+**WeChat QR コード**
+
+<img src="docs/assets/contact-wechat.png" alt="WeChat QR コード（アップロード待ち）" width="220">
+
+WeChat の友達申請には **Backleaf** と記載してください。`docs/assets/contact-wechat.png` をアップロードすると、ここに表示されます。
+
 ## ソースからビルド
 
 ```bash

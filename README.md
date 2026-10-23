@@ -66,6 +66,16 @@ Your API key is read from Obsidian SecretStorage and sent only as authorization 
 
 Backleaf contains no client-side telemetry, advertising, or self-update mechanism.
 
+## Contact
+
+Questions, suggestions, and feedback are welcome: [hnyu588@gmail.com](mailto:hnyu588@gmail.com)
+
+**WeChat**
+
+<img src="docs/assets/contact-wechat.png" alt="WeChat QR code — pending upload" width="220">
+
+When adding the author on WeChat, please include **Backleaf** in your request. The QR code image will appear here after `docs/assets/contact-wechat.png` is uploaded.
+
 ## Build from source
 
 ```bash

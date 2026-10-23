@@ -66,6 +66,16 @@ API Key 从 Obsidian SecretStorage 读取，仅作为身份验证信息发送给
 
 Backleaf 不包含客户端遥测、广告或自行更新机制。
 
+## 联系作者
+
+欢迎反馈问题、建议和使用感受：[hnyu588@gmail.com](mailto:hnyu588@gmail.com)
+
+**微信二维码**
+
+<img src="docs/assets/contact-wechat.png" alt="微信二维码（待上传）" width="220">
+
+添加微信时请备注 **Backleaf**。将二维码图片上传为 `docs/assets/contact-wechat.png` 后，会自动显示在这里。
+
 ## 从源码构建
 
 ```bash

@@ -66,6 +66,16 @@ API 키는 Obsidian SecretStorage에서 읽어 설정한 엔드포인트의 인�
 
 Backleaf에는 클라이언트 측 원격 측정, 광고, 자체 업데이트 기능이 없습니다.
 
+## 연락처
+
+질문, 제안 및 의견은 다음 이메일로 보내 주세요: [hnyu588@gmail.com](mailto:hnyu588@gmail.com)
+
+**WeChat QR 코드**
+
+<img src="docs/assets/contact-wechat.png" alt="WeChat QR 코드 (업로드 대기 중)" width="220">
+
+WeChat 친구 요청에 **Backleaf**라고 적어 주세요. `docs/assets/contact-wechat.png`를 업로드하면 여기에 자동으로 표시됩니다.
+
 ## 소스에서 빌드
 
 ```bash
