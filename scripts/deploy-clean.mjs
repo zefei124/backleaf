@@ -4,7 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const cleanPlugin = "D:\\Projects\\obsidian-ai-reading-companion-clean-test\\.obsidian\\plugins\\backleaf";
+const cleanPlugin = "D:\\path\\to\\Backleaf-Test-Vault\\.obsidian\\plugins\\backleaf";
 const artifacts = ["main.js", "manifest.json", "styles.css"];
 
 async function sha256(filePath) {

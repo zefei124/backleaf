@@ -6,7 +6,7 @@
 
 ## 1. 项目与 Git 状态
 
-- 项目路径：`D:\Projects\obsidian-ai-reading-companion`
+- 项目路径：`D:\path\to\backleaf`
 - 当前分支：`community-plugin-v1`
 - 当前 HEAD：`fa2c8ab137cd83398503b69d66e2f546ec02131b`
 - HEAD 提交：`docs: add v1.1.1-ui changelog`
@@ -178,13 +178,13 @@ conversationSnapshot
 Clean Test Vault：
 
 ```text
-D:\Projects\obsidian-ai-reading-companion-clean-test
+D:\path\to\Backleaf-Test-Vault
 ```
 
 插件目录：
 
 ```text
-D:\Projects\obsidian-ai-reading-companion-clean-test\.obsidian\plugins\backleaf
+D:\path\to\Backleaf-Test-Vault\.obsidian\plugins\backleaf
 ```
 
 Production Vault 不在本阶段范围内，禁止部署或修改。
