@@ -1,8 +1,22 @@
+<div align="center">
+
 # Backleaf 叶间
+
+**ハイライトした一節を、思考へ育てる。**
 
 PDF の選択範囲について AI と対話し、有益な会話を構造化された読書ノートに残しましょう。
 
-[English](README.md) | [简体中文](README.zh-CN.md) | **日本語** | [한국어](README.ko.md)
+[English](README.md) · [简体中文](README.zh-CN.md) · **日本語** · [한국어](README.ko.md)
+
+[![Latest release](https://img.shields.io/github/v/release/zefei124/backleaf?style=flat-square&color=D4537E)](https://github.com/zefei124/backleaf/releases/latest)
+![Obsidian 1.11.4+](https://img.shields.io/badge/Obsidian-1.11.4%2B-7C3AED?style=flat-square)
+[![MIT License](https://img.shields.io/badge/license-MIT-2F855A?style=flat-square)](LICENSE)
+
+[**最新版をダウンロード**](https://github.com/zefei124/backleaf/releases/latest) · [プライバシー](docs/privacy.md) · [更新履歴](CHANGELOG.md)
+
+</div>
+
+---
 
 Backleaf なら、Obsidian の中でじっくり読書できます。PDF の文章を選び、内蔵チャットで質問し、対話を Markdown として保存できます。保存した対話を振り返り、原文の位置に戻ることもできます。
 

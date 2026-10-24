@@ -1,8 +1,22 @@
+<div align="center">
+
 # Backleaf 叶间
+
+**밑줄 친 한 구절을 생각으로 키워 보세요.**
 
 PDF에서 선택한 구절에 대해 AI와 대화하고, 유용한 대화를 구조화된 독서 노트로 남기세요.
 
-[English](README.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | **한국어**
+[English](README.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · **한국어**
+
+[![Latest release](https://img.shields.io/github/v/release/zefei124/backleaf?style=flat-square&color=D4537E)](https://github.com/zefei124/backleaf/releases/latest)
+![Obsidian 1.11.4+](https://img.shields.io/badge/Obsidian-1.11.4%2B-7C3AED?style=flat-square)
+[![MIT License](https://img.shields.io/badge/license-MIT-2F855A?style=flat-square)](LICENSE)
+
+[**최신 버전 다운로드**](https://github.com/zefei124/backleaf/releases/latest) · [개인정보 보호](docs/privacy.md) · [변경 기록](CHANGELOG.md)
+
+</div>
+
+---
 
 Backleaf로 Obsidian 안에서 깊이 읽을 수 있습니다. PDF 원문을 선택하고 내장 채팅에서 질문한 뒤, 대화를 Markdown으로 저장하세요. 저장된 대화를 다시 살펴보고 원문의 해당 위치로 돌아갈 수도 있습니다.
 

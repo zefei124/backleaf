@@ -1,82 +1,89 @@
-# Backleaf 叶间｜AI 阅读伴侣
+<div align="center">
 
-Discuss PDF selections with AI and turn useful conversations into structured reading notes.
+# Backleaf 叶间
 
-**English** | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
+**Let every highlighted passage grow into a line of thought.**
 
-Backleaf keeps close reading inside Obsidian: select text in a PDF, ask questions in the built-in chat, save the discussion as Markdown, revisit saved discussions, and return to the source passage.
+Discuss PDF selections with AI, keep the useful parts as ordinary Markdown, and return to the source whenever you need.
 
-## Features
+[**English**](README.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 
-- Discuss the current PDF selection in a native Backleaf chat view.
-- Carry the selected text, book title, chapter, page, and source link into the conversation.
-- Continue multi-turn conversations and restore the current discussion after viewing history.
-- Save independent discussions into one structured reading note per book.
-- Reopen saved discussions as read-only history and start a new discussion from the same source.
-- Update saved understanding without overwriting notes changed outside Backleaf.
-- View compatible reading notes as a Thought Tree.
-- Use English, Simplified Chinese, Japanese, or Korean interface text according to the Obsidian language.
+[![Latest release](https://img.shields.io/github/v/release/zefei124/backleaf?style=flat-square&color=D4537E)](https://github.com/zefei124/backleaf/releases/latest)
+![Obsidian 1.11.4+](https://img.shields.io/badge/Obsidian-1.11.4%2B-7C3AED?style=flat-square)
+[![MIT License](https://img.shields.io/badge/license-MIT-2F855A?style=flat-square)](LICENSE)
+![Languages](https://img.shields.io/badge/UI-English%20%7C%20中文%20%7C%20日本語%20%7C%20한국어-4A5568?style=flat-square)
 
-## Requirements
+[**Download the latest release**](https://github.com/zefei124/backleaf/releases/latest) · [Installation](#installation) · [Privacy](docs/privacy.md) · [Changelog](CHANGELOG.md)
 
-- Obsidian 1.11.4 or later.
-- A DeepSeek API key. Backleaf uses your own account and API quota.
-- A PDF opened in Obsidian when starting a selection-based discussion.
+</div>
+
+---
+
+Backleaf keeps close reading inside Obsidian. Select a passage in a PDF, ask what you really want to understand, continue the conversation, and save the conclusion into a structured reading note. The note stays yours: it is plain Markdown, editable outside Backleaf, with a link back to the original passage.
+
+## From a passage to a thought tree
+
+| 1. Select | 2. Ask | 3. Keep | 4. Revisit |
+|:--:|:--:|:--:|:--:|
+| Highlight a PDF passage | Continue a focused conversation | Save the quote, dialogue, and your understanding | Review it in history or the Thought Tree |
+
+```mermaid
+flowchart LR
+  A[PDF passage] --> B[Backleaf conversation]
+  B --> C[Structured reading note]
+  C --> D[Thought Tree]
+  D --> A
+```
+
+## What feels different
+
+- **The source stays in view.** Backleaf carries the selected text, book, chapter, page, and source link into the discussion.
+- **Conversations become notes.** Useful discussions can be saved per book instead of disappearing in a chat log.
+- **Your understanding remains yours.** You can write it yourself, edit an AI draft, and reopen saved discussions without losing the live conversation.
+- **Backleaf respects external edits.** If a saved discussion changed outside the plugin, Backleaf refuses to overwrite it until you review the conflict.
 
 ## Installation
 
-### Community Plugins
-
-Once Backleaf is listed in the Obsidian Community directory:
-
-1. Open **Settings → Community plugins**.
-2. Select **Browse** and search for **Backleaf**.
-3. Select **Install**, then **Enable**.
-
-### Manual installation
-
-1. Download `main.js`, `manifest.json`, and `styles.css` from the latest GitHub release.
+1. Download `main.js`, `manifest.json`, and `styles.css` from the [latest release](https://github.com/zefei124/backleaf/releases/latest).
 2. Create `<vault>/.obsidian/plugins/backleaf/`.
 3. Copy the three files into that folder.
 4. Reload Obsidian and enable **Backleaf** under **Settings → Community plugins**.
 
-## Setup
+> [!NOTE]
+> Backleaf requires Obsidian 1.11.4 or later. It is not yet listed in the Obsidian Community directory.
 
-1. Open **Settings → Community plugins → Backleaf**.
-2. Add your DeepSeek API key. The key is stored through Obsidian SecretStorage and is not written to Backleaf's `data.json`.
-3. Optionally change the model, API base URL, or request timeout.
+## Set up your AI provider
 
-The default endpoint is `https://api.deepseek.com`. Advanced settings also accept another compatible HTTPS endpoint or a local HTTP endpoint.
+Open **Settings → Community plugins → Backleaf**, then add your DeepSeek API key. The key is stored through Obsidian SecretStorage and is never written to Backleaf's `data.json`.
 
-## Usage
+The default endpoint is `https://api.deepseek.com`. Advanced settings accept another compatible HTTPS endpoint or a local HTTP endpoint. Backleaf uses your own account and API quota.
 
-1. Open a PDF and select some text.
-2. Run the Backleaf command from the command palette or the PDF context action.
-3. Ask questions in the Backleaf chat view.
-4. Save the discussion when it is useful. Backleaf preserves the original quotation, the conversation, and a source link when available.
-5. Open a reading note in the Backleaf Thought Tree view to review its structure.
+## A private reading workflow
 
-Saved notes remain ordinary Markdown files and can be edited outside Backleaf. If a saved discussion was changed externally, Backleaf refuses to overwrite it until you review the conflict.
+> [!IMPORTANT]
+> Backleaf makes a network request only when you send a message. It sends the selected passage, book title, chapter when available, and the current Backleaf conversation to the endpoint you configured.
 
-## Privacy and network access
-
-Backleaf makes network requests only when you send a message to the configured AI endpoint. It sends the current selected text, book title, chapter when available, and the current Backleaf conversation. It does not intentionally send the whole PDF, unrelated vault notes, saved reading notes, local file paths, or other local data.
-
-Your API key is read from Obsidian SecretStorage and sent only as authorization to the configured endpoint. API usage and data handling are governed by the provider and endpoint you choose. See the full [privacy documentation](docs/privacy.md).
-
-Backleaf contains no client-side telemetry, advertising, or self-update mechanism.
+It does not intentionally send the whole PDF, unrelated vault notes, saved reading notes, local file paths, or other local data. Backleaf contains no client-side telemetry, advertising, or self-update mechanism. See the full [privacy documentation](docs/privacy.md).
 
 ## Contact
 
-Questions, suggestions, and feedback are welcome: [hnyu588@gmail.com](mailto:hnyu588@gmail.com)
+Questions, ideas, and feedback are welcome.
 
-**WeChat**
+- Email: [hnyu588@gmail.com](mailto:hnyu588@gmail.com)
+- WeChat: please include **Backleaf** in your friend request
+
+<details>
+<summary>Show the WeChat QR code</summary>
+
+<br>
 
 <img src="docs/assets/contact-wechat.png" alt="WeChat QR code — pending upload" width="220">
 
-When adding the author on WeChat, please include **Backleaf** in your request. The QR code image will appear here after `docs/assets/contact-wechat.png` is uploaded.
+The QR code will appear after `docs/assets/contact-wechat.png` is uploaded.
 
-## Build from source
+</details>
+
+## For contributors
 
 ```bash
 npm install
@@ -84,8 +91,4 @@ npm run build
 npm test
 ```
 
-The release files are generated at the repository root: `main.js`, `manifest.json`, and `styles.css`.
-
-## License
-
-Backleaf is released under the [MIT License](LICENSE). Third-party software and services remain subject to their own licenses and terms.
+The release files are generated at the repository root: `main.js`, `manifest.json`, and `styles.css`. Backleaf is released under the [MIT License](LICENSE).
