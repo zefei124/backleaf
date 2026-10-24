@@ -35,6 +35,14 @@ flowchart LR
   D --> A
 ```
 
+## Demo
+
+> 🎬 A short Backleaf walkthrough is being prepared.
+
+<!-- When the video is ready, replace the notice above with:
+[![Watch the Backleaf walkthrough](docs/assets/backleaf-demo-cover.png)](VIDEO_URL)
+-->
+
 ## What feels different
 
 - **The source stays in view.** Backleaf carries the selected text, book, chapter, page, and source link into the discussion.

@@ -35,6 +35,14 @@ flowchart LR
   D --> A
 ```
 
+## 使用演示
+
+> 🎬 Backleaf 使用视频正在准备中。
+
+<!-- 视频准备好后，用下面两行替换上方提示：
+[![观看 Backleaf 使用演示](docs/assets/backleaf-demo-cover.png)](VIDEO_URL)
+-->
+
 ## 它有什么不同
 
 - **原文一直在场。** 选区、书名、章节、页码和原文链接会随讨论一起保留。

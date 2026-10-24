@@ -20,6 +20,14 @@ PDF에서 선택한 구절에 대해 AI와 대화하고, 유용한 대화를 구
 
 Backleaf로 Obsidian 안에서 깊이 읽을 수 있습니다. PDF 원문을 선택하고 내장 채팅에서 질문한 뒤, 대화를 Markdown으로 저장하세요. 저장된 대화를 다시 살펴보고 원문의 해당 위치로 돌아갈 수도 있습니다.
 
+## 사용 데모
+
+> 🎬 Backleaf 사용 영상을 준비하고 있습니다.
+
+<!-- 영상이 준비되면 위 안내를 다음 줄로 교체하세요:
+[![Backleaf 사용 데모 보기](docs/assets/backleaf-demo-cover.png)](VIDEO_URL)
+-->
+
 ## 기능
 
 - Backleaf 기본 채팅 화면에서 현재 PDF 선택 영역에 대해 대화합니다.
