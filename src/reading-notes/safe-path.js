@@ -9,6 +9,13 @@ const { sanitizeFileName } = require("./normalize");
 
 const DEFAULT_READING_NOTES_DIR = "Books/Reading Notes";
 
+function hasControlCharacter(value) {
+  return Array.from(value).some((character) => {
+    const code = character.charCodeAt(0);
+    return code <= 0x1f || code === 0x7f;
+  });
+}
+
 /**
  * Validate a vault-relative Reading Notes folder. Invalid input is rejected, never rewritten.
  * Returns the folder path unchanged, or throws.
@@ -20,7 +27,7 @@ function validateBaseDir(baseDir, options = {}) {
   if (typeof baseDir !== "string" || baseDir.length === 0) {
     throw new Error("Reading Notes folder must be a non-empty vault-relative path.");
   }
-  if (/[\u0000-\u001F\u007F]/.test(baseDir)) {
+  if (hasControlCharacter(baseDir)) {
     throw new Error("Reading Notes folder must not contain control characters.");
   }
   if (baseDir.includes("\\")) {

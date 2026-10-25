@@ -805,7 +805,10 @@ export default class Backleaf extends Plugin {
   isReliableOutlineTitle(title: any) {
     const text = String(title == null ? '' : title).trim();
     if (!text) return false;
-    if (/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F\uFFFD]/.test(text)) return false;
+    if (Array.from(text).some((character) => {
+      const code = character.charCodeAt(0);
+      return code <= 0x08 || code === 0x0b || code === 0x0c || (code >= 0x0e && code <= 0x1f) || code === 0x7f || code === 0xfffd;
+    })) return false;
     if (/[\uE000-\uF8FF]/.test(text)) return false;
     return true;
   }

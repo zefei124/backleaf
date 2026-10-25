@@ -128,8 +128,14 @@ function findUnderstanding(discussion: any) {
   return value && typeof value === 'object' && value.status ? value : null;
 }
 
+const UNDERSTANDING_SOURCE_LABELS: Record<string, string> = {
+  user_written: '我写的',
+  ai_drafted_edited: 'AI 起草 · 我改过',
+  ai_drafted_confirmed: 'AI 起草 · 已确认',
+};
+
 function understandingSourceLabel(source: string, text: any) {
-  return translateUi(({ user_written: '我写的', ai_drafted_edited: 'AI 起草 · 我改过', ai_drafted_confirmed: 'AI 起草 · 已确认' } as any)[source] || '', text.locale);
+  return translateUi(UNDERSTANDING_SOURCE_LABELS[source] || '', text.locale);
 }
 
 function sourceLinkFor(node: any) {

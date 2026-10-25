@@ -6,6 +6,11 @@
 
 const MAX_NAME_LENGTH = 120;
 
+function isControlCharacter(character) {
+  const code = character.charCodeAt(0);
+  return code <= 0x1f || code === 0x7f;
+}
+
 /**
  * Sanitize a book title into a safe file name (no separators, no traversal).
  * Returns "" when nothing usable remains.
@@ -14,7 +19,8 @@ function sanitizeFileName(bookTitle) {
   let name = String(bookTitle == null ? "" : bookTitle);
 
   // Strip control characters and Windows-illegal characters (incl. path separators).
-  name = name.replace(/[\u0000-\u001F\u007F<>:"/\\|?*]/g, "");
+  name = Array.from(name, (character) => isControlCharacter(character) ? "" : character).join("");
+  name = name.replace(/[<>:"/\\|?*]/g, "");
   // Collapse any dot-run (defeats "..", "...", etc).
   name = name.replace(/\.{2,}/g, ".");
   // Collapse whitespace.
