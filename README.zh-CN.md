@@ -2,9 +2,9 @@
 
 # Backleaf 叶间
 
-**让每一次划线，都继续长成思考。**
+**别让划线停在 PDF 里。**
 
-在 Obsidian 里围绕 PDF 原文追问，把真正有用的对话留下来，并随时回到原文。
+选中一段原文，与 AI 一起追问、澄清和推演，再把真正属于你的理解沉淀成带原文链接的 Markdown 读书笔记。
 
 [English](README.md) · [**简体中文**](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 
@@ -13,52 +13,57 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-2F855A?style=flat-square)](LICENSE)
 ![四语界面](https://img.shields.io/badge/界面-English%20%7C%20中文%20%7C%20日本語%20%7C%20한국어-4A5568?style=flat-square)
 
-[**下载最新版**](https://github.com/zefei124/backleaf/releases/latest) · [安装方法](#安装) · [隐私说明](docs/privacy.zh-CN.md) · [更新日志](CHANGELOG.md)
+[**安装到 Obsidian**](obsidian://show-plugin?id=backleaf) · [看看它如何工作](#从一段原文长成一条思路) · [隐私说明](docs/privacy.zh-CN.md) · [更新日志](CHANGELOG.md)
 
 </div>
 
 ---
 
-Backleaf 让深度阅读留在 Obsidian 中。选中一段 PDF 原文，提出你真正关心的问题，继续追问，再把结论保存成结构化读书笔记。笔记始终是普通 Markdown：可以自由编辑，也保留了返回原文的链接。
+划线很容易积累，也很容易被忘记。Backleaf 把一次阅读里真正重要的东西留在一起：触发思考的原文、你提出的问题、逐渐展开的对话，以及最终愿意留下的理解。
 
-## 从一段原文，长成一棵思考树
+<img src="docs/assets/backleaf-reading-workflow.png" alt="Obsidian PDF 旁的 Backleaf 对话与我的理解" width="100%">
 
-| 1. 选中 | 2. 追问 | 3. 留下 | 4. 回看 |
-|:--:|:--:|:--:|:--:|
-| 选中 PDF 原文 | 围绕原文继续讨论 | 保存引用、对话和你的理解 | 在历史讨论或思考树里重新展开 |
+## 从一段原文，长成一条思路
 
-```mermaid
-flowchart LR
-  A[PDF 原文] --> B[Backleaf 对话]
-  B --> C[结构化读书笔记]
-  C --> D[思考树]
-  D --> A
-```
+1. **选中让你停下来的句子。** 在 Obsidian 的 PDF 中划出一段原文。
+2. **从原文出发追问。** Backleaf 会把选区、书名、章节、页码和原文链接带进讨论。
+3. **决定什么值得留下。** 继续追问到想法变得清楚，再亲自写下或修改“我的理解”。
+4. **以后重新进入这段思考。** 对话会保存成普通 Markdown，也可以从历史、笔记或思考树回看。
 
-## 使用演示
-
-> 🎬 Backleaf 使用视频正在准备中。
-
-<!-- 视频准备好后，用下面两行替换上方提示：
+<!-- 视频准备好后，在这里加入：
 [![观看 Backleaf 使用演示](docs/assets/backleaf-demo-cover.png)](VIDEO_URL)
 -->
 
-## 它有什么不同
+## 它不只是 PDF 旁边的 AI 聊天框
 
-- **原文一直在场。** 选区、书名、章节、页码和原文链接会随讨论一起保留。
-- **对话不再只是聊天记录。** 有价值的讨论可以按书保存，逐渐沉淀成自己的读书笔记。
-- **理解由你确认。** 你可以自己写，也可以修改 AI 草稿；查看历史后，当前讨论仍然可以恢复。
-- **不会悄悄覆盖笔记。** 如果某条讨论在 Backleaf 外被修改，插件会先提示冲突，等你核对。
+- **语境不会丢。** 每次讨论都保留原文、页码、章节、书名和返回出处的路径。
+- **对话会成为真正的笔记。** 引用、问题、讨论和最终理解一起保存在普通 Markdown 中。
+- **最后由你来表达。** 可以让 AI 起草，也可以直接修改或完全自己写下理解。
+- **Vault 始终是事实来源。** 如果笔记在 Backleaf 外被修改，插件不会悄悄覆盖你的内容。
+
+## 看见自己的阅读路径
+
+思考树会把兼容的读书笔记展开为一条可视路径：从书和章节出发，经过原文、问题与回答，重新找回思考是怎样发生的。
+
+<img src="docs/assets/backleaf-thought-tree.png" alt="Backleaf 思考树展示从原文延伸出的提问和回答" width="100%">
 
 ## 安装
 
-1. 从[最新版本](https://github.com/zefei124/backleaf/releases/latest)下载 `main.js`、`manifest.json` 和 `styles.css`。
-2. 创建 `<你的仓库>/.obsidian/plugins/backleaf/` 文件夹。
-3. 把三个文件复制进去。
-4. 重新加载 Obsidian，然后在 **设置 → 第三方插件** 中启用 **Backleaf**。
+1. 打开 Obsidian 的 **设置 → 第三方插件 → 浏览**。
+2. 搜索 **Backleaf**。
+3. 点击 **安装**，然后启用插件。
 
 > [!NOTE]
-> Backleaf 需要 Obsidian 1.11.4 或更高版本，目前尚未上架 Obsidian 社区插件目录。
+> Backleaf 需要 Obsidian 1.11.4 或更高版本。
+
+<details>
+<summary>手动安装</summary>
+
+1. 从[最新版本](https://github.com/zefei124/backleaf/releases/latest)下载 `main.js`、`manifest.json` 和 `styles.css`。
+2. 创建 `<你的仓库>/.obsidian/plugins/backleaf/` 文件夹。
+3. 把三个文件复制进去，重新加载 Obsidian，然后启用 Backleaf。
+
+</details>
 
 ## 配置 AI 服务
 

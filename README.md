@@ -2,9 +2,9 @@
 
 # Backleaf 叶间
 
-**Let every highlighted passage grow into a line of thought.**
+**Don't let a highlight end inside the PDF.**
 
-Discuss PDF selections with AI, keep the useful parts as ordinary Markdown, and return to the source whenever you need.
+Select a passage, question it with AI, and turn what you understand into linked Markdown reading notes—without leaving Obsidian.
 
 [**English**](README.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 
@@ -13,52 +13,57 @@ Discuss PDF selections with AI, keep the useful parts as ordinary Markdown, and 
 [![MIT License](https://img.shields.io/badge/license-MIT-2F855A?style=flat-square)](LICENSE)
 ![Languages](https://img.shields.io/badge/UI-English%20%7C%20中文%20%7C%20日本語%20%7C%20한국어-4A5568?style=flat-square)
 
-[**Download the latest release**](https://github.com/zefei124/backleaf/releases/latest) · [Installation](#installation) · [Privacy](docs/privacy.md) · [Changelog](CHANGELOG.md)
+[**Install from Obsidian**](obsidian://show-plugin?id=backleaf) · [See how it works](#from-a-passage-to-a-line-of-thought) · [Privacy](docs/privacy.md) · [Changelog](CHANGELOG.md)
 
 </div>
 
 ---
 
-Backleaf keeps close reading inside Obsidian. Select a passage in a PDF, ask what you really want to understand, continue the conversation, and save the conclusion into a structured reading note. The note stays yours: it is plain Markdown, editable outside Backleaf, with a link back to the original passage.
+Highlights are easy to collect and easy to forget. Backleaf keeps the important part of reading together: the source passage, the questions it raised, the conversation that followed, and the understanding you decided to keep.
 
-## From a passage to a thought tree
+<img src="docs/assets/backleaf-reading-workflow.png" alt="Backleaf beside a PDF in Obsidian, showing a saved discussion and editable understanding" width="100%">
 
-| 1. Select | 2. Ask | 3. Keep | 4. Revisit |
-|:--:|:--:|:--:|:--:|
-| Highlight a PDF passage | Continue a focused conversation | Save the quote, dialogue, and your understanding | Review it in history or the Thought Tree |
+## From a passage to a line of thought
 
-```mermaid
-flowchart LR
-  A[PDF passage] --> B[Backleaf conversation]
-  B --> C[Structured reading note]
-  C --> D[Thought Tree]
-  D --> A
-```
+1. **Select what stopped you.** Highlight a sentence in an Obsidian PDF.
+2. **Ask from the source.** Backleaf carries the quote, book, chapter, page, and source link into the conversation.
+3. **Decide what is worth keeping.** Continue asking until the idea becomes clear, then write or edit your own understanding.
+4. **Return to the thought later.** Save the discussion as ordinary Markdown and revisit it through history, the note, or the Thought Tree.
 
-## Demo
-
-> 🎬 A short Backleaf walkthrough is being prepared.
-
-<!-- When the video is ready, replace the notice above with:
+<!-- When the video is ready, add it here:
 [![Watch the Backleaf walkthrough](docs/assets/backleaf-demo-cover.png)](VIDEO_URL)
 -->
 
-## What feels different
+## More than an AI chat beside a PDF
 
-- **The source stays in view.** Backleaf carries the selected text, book, chapter, page, and source link into the discussion.
-- **Conversations become notes.** Useful discussions can be saved per book instead of disappearing in a chat log.
-- **Your understanding remains yours.** You can write it yourself, edit an AI draft, and reopen saved discussions without losing the live conversation.
-- **Backleaf respects external edits.** If a saved discussion changed outside the plugin, Backleaf refuses to overwrite it until you review the conflict.
+- **Context stays attached.** A discussion remembers the passage, page, chapter, book, and route back to the source.
+- **Useful conversations become durable notes.** Quotes, questions, dialogue, and your final understanding stay together in plain Markdown.
+- **You remain the author.** Draft with AI if you want, revise it directly, or write the conclusion yourself.
+- **Your Vault remains the source of truth.** Backleaf respects edits made outside the plugin and refuses to overwrite a changed discussion silently.
+
+## See the path your reading took
+
+The Thought Tree turns a compatible reading note into a visual trail from book and chapter to source passage, questions, and answers.
+
+<img src="docs/assets/backleaf-thought-tree.png" alt="Backleaf Thought Tree showing a source passage and the questions that grew from it" width="100%">
 
 ## Installation
 
-1. Download `main.js`, `manifest.json`, and `styles.css` from the [latest release](https://github.com/zefei124/backleaf/releases/latest).
-2. Create `<vault>/.obsidian/plugins/backleaf/`.
-3. Copy the three files into that folder.
-4. Reload Obsidian and enable **Backleaf** under **Settings → Community plugins**.
+1. Open **Settings → Community plugins → Browse** in Obsidian.
+2. Search for **Backleaf**.
+3. Select **Install**, then **Enable**.
 
 > [!NOTE]
-> Backleaf requires Obsidian 1.11.4 or later. It is not yet listed in the Obsidian Community directory.
+> Backleaf requires Obsidian 1.11.4 or later.
+
+<details>
+<summary>Manual installation</summary>
+
+1. Download `main.js`, `manifest.json`, and `styles.css` from the [latest release](https://github.com/zefei124/backleaf/releases/latest).
+2. Create `<vault>/.obsidian/plugins/backleaf/`.
+3. Copy the three files into that folder, reload Obsidian, and enable Backleaf.
+
+</details>
 
 ## Set up your AI provider
 
