@@ -14,7 +14,9 @@ const DEFAULT_READING_NOTES_DIR = "Books/Reading Notes";
  * Returns the folder path unchanged, or throws.
  */
 function validateBaseDir(baseDir, options = {}) {
-  const configDir = String(options.configDir || ".obsidian");
+  const configDir = typeof options.configDir === "string" && options.configDir.length > 0
+    ? options.configDir
+    : null;
   if (typeof baseDir !== "string" || baseDir.length === 0) {
     throw new Error("Reading Notes folder must be a non-empty vault-relative path.");
   }
@@ -27,7 +29,7 @@ function validateBaseDir(baseDir, options = {}) {
   if (baseDir.startsWith("/") || /^[A-Za-z]:/.test(baseDir)) {
     throw new Error("Reading Notes folder must be vault-relative, not absolute.");
   }
-  if (baseDir === configDir || baseDir.startsWith(`${configDir}/`)) {
+  if (configDir && (baseDir === configDir || baseDir.startsWith(`${configDir}/`))) {
     throw new Error("Reading Notes folder must not be inside the Obsidian config folder.");
   }
 

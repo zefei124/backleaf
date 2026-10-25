@@ -217,6 +217,8 @@ function createEnv(options = {}) {
 
   // ---- window ----
   const windowStub = {
+    setTimeout,
+    clearTimeout,
     getSelection() {
       if (opts.getSelectionThrows) throw new Error("no selection api");
       return selection;

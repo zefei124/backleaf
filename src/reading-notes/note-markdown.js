@@ -19,10 +19,9 @@ function clean(value) {
   return String(value).trim();
 }
 
-function createDiscussionId(random = globalThis.crypto) {
-  if (!random && typeof process !== "undefined" && process.versions && process.versions.node && typeof require === "function") {
-    try { random = require("node:crypto"); } catch (_) { /* Web Crypto is the supported runtime path. */ }
-  }
+function createDiscussionId(random = typeof window !== "undefined" && window.crypto
+  ? window.crypto
+  : typeof crypto !== "undefined" ? crypto : null) {
   if (random && typeof random.randomUUID === "function") {
     const value = String(random.randomUUID()).toLowerCase();
     if (/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(value)) return `bl_${value}`;

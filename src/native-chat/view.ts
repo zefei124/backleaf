@@ -131,7 +131,7 @@ export function createReadingChatViewClass(obsidian: any, plugin: any) {
     inputEl: any = null;
     messagesEl: any = null;
     renderDeferred = false;
-    renderTimer: any = null;
+    renderTimer: number | null = null;
     holdNextSend = false;
     composing = false; // IME composition in progress in the composer
     submitting = false; // a send is in flight: Enter / Send never send twice
@@ -171,7 +171,7 @@ export function createReadingChatViewClass(obsidian: any, plugin: any) {
     async onClose() {
       if (this.unsubscribe) this.unsubscribe();
       this.unsubscribe = null;
-      if (this.renderTimer) clearTimeout(this.renderTimer);
+      if (this.renderTimer) window.clearTimeout(this.renderTimer);
       this.renderTimer = null;
       if (this.renderComponent) this.removeChild(this.renderComponent);
       this.renderComponent = null;
@@ -810,7 +810,7 @@ export function createReadingChatViewClass(obsidian: any, plugin: any) {
     requestRender() {
       if (this.renderDeferred) {
         if (!this.renderTimer) {
-          this.renderTimer = setTimeout(() => {
+          this.renderTimer = window.setTimeout(() => {
             this.renderTimer = null;
             this.render();
           }, 0);

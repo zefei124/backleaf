@@ -247,7 +247,11 @@ class DiscussionHighlighter {
       if (pageNumber !== savedTarget.page) continue;
       const layer = this.savedLayers.get(savedTarget.key);
       if (layer) {
-        try { layer.remove?.(); } catch (error) {}
+        try {
+          layer.remove?.();
+        } catch (error) {
+          // A stale PDF overlay may already have been removed by Obsidian.
+        }
         this.savedLayers.delete(savedTarget.key);
       }
       this.drawSavedTarget(savedTarget);

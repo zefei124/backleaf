@@ -106,7 +106,7 @@ export default class Backleaf extends Plugin {
   declare nativeSettings: any;
   // Current Discussion Highlight (UI-only, never persisted).
   declare discussionHighlight: DiscussionHighlighter | null;
-  declare highlightTimer: any;
+  declare highlightTimer: number | null;
   declare savedHighlightRequest: number;
   // Vault listeners kept by hand when the host has no registerEvent.
   declare vaultEventRefs: any[];
@@ -118,7 +118,7 @@ export default class Backleaf extends Plugin {
     this.addCommand({
       id: 'send-pdf-selection-to-agent',
       name: this.t('commandSendSelection'),
-      callback: () => this.sendPdfSelectionToAgent(),
+      callback: () => void this.sendPdfSelectionToAgent(),
     });
 
     this.registerDomEvent(
@@ -133,12 +133,12 @@ export default class Backleaf extends Plugin {
     this.addCommand({
       id: 'generate-thought-tree-archive',
       name: translateUi('Generate / Update Thought Tree Archive', this.getLocale()),
-      callback: () => this.generateThoughtTreeArchive(),
+      callback: () => void this.generateThoughtTreeArchive(),
     });
   }
 
   onunload() {
-    if (this.highlightTimer) clearTimeout(this.highlightTimer);
+    if (this.highlightTimer) window.clearTimeout(this.highlightTimer);
     this.highlightTimer = null;
     this.discussionHighlight?.clear();
     this.detachHighlightListener();
@@ -200,18 +200,18 @@ export default class Backleaf extends Plugin {
       this.registerView(THOUGHT_TREE_VIEW_TYPE, (leaf: any) => new ThoughtTreeViewClass(leaf));
       // The ribbon and the command only open / focus the panel. New selections are
       // captured by B′ in the composer (docs/design-freeze-auto-selection-highlight.md).
-      this.addRibbonIcon('messages-square', text.ribbon, () => this.activateReadingChatView());
-      this.addRibbonIcon('list-tree', translateUi('Backleaf Thought Tree', this.getLocale()), () => this.activateThoughtTreeView());
+      this.addRibbonIcon('messages-square', text.ribbon, () => void this.activateReadingChatView());
+      this.addRibbonIcon('list-tree', translateUi('Backleaf Thought Tree', this.getLocale()), () => void this.activateThoughtTreeView());
       this.addCommand({
         // Id kept so existing user hotkeys keep working.
         id: 'discuss-pdf-selection-native-chat',
         name: text.command,
-        callback: () => this.activateReadingChatView(),
+        callback: () => void this.activateReadingChatView(),
       });
       this.addCommand({
         id: 'open-backleaf-thought-tree',
         name: translateUi('Open Backleaf Thought Tree', this.getLocale()),
-        callback: () => this.activateThoughtTreeView(),
+        callback: () => void this.activateThoughtTreeView(),
       });
       const SettingTabClass: any = createSettingsTabClass(api, this);
       this.addSettingTab(new SettingTabClass(this.app, this));
@@ -332,7 +332,7 @@ export default class Backleaf extends Plugin {
   scheduleDiscussionHighlight() {
     if (!this.discussionHighlight) return;
     if (this.highlightTimer) return;
-    this.highlightTimer = setTimeout(() => {
+    this.highlightTimer = window.setTimeout(() => {
       this.highlightTimer = null;
       this.syncDiscussionHighlight();
     }, 0);
