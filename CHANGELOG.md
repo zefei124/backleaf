@@ -1,5 +1,26 @@
 # Changelog
 
+# v1.2.2
+
+## Improved
+
+- Use Obsidian DOM helpers when creating PDF selection overlays.
+- Use browser-compatible Web Crypto and timer APIs throughout the plugin.
+- Respect the Vault's configured Obsidian directory instead of assuming `.obsidian`.
+- Add contribution guidance for developers and reviewers.
+
+## Fixed
+
+- Avoid scanner false positives in filename and outline-title validation while preserving the intended validation rules.
+- Remove an unsafe Thought Tree label cast.
+- Mark intentionally unawaited UI actions explicitly.
+
+## Verification
+
+- Build and TypeScript checks passed.
+- Tests: 477/477 passed.
+- Minimum Obsidian version remains 1.11.4.
+
 # v1.2.1
 
 ## Added
