@@ -167,17 +167,14 @@ function measureRange(pageView, range) {
 }
 
 function renderLayer(pageEl, rects, target, rectClass = RECT_CLASS, onSavedTargetClick = null) {
-  const doc = pageEl.ownerDocument;
-  const layer = doc.createElement("div");
-  layer.className = LAYER_CLASS;
+  const layer = pageEl.createDiv({ cls: LAYER_CLASS });
   if (target && target.key) layer.dataset.backleafSavedSourceKey = target.key;
   if (layer.dataset) {
     layer.dataset.page = String(target.page);
     layer.dataset.range = target.rangeStr;
   }
   for (const rect of rects) {
-    const el = doc.createElement("div");
-    el.className = rectClass;
+    const el = layer.createDiv({ cls: rectClass });
     if (rectClass === SAVED_RECT_CLASS && target && target.key) {
       el.dataset.backleafSavedSourceKey = target.key;
     }
@@ -185,11 +182,9 @@ function renderLayer(pageEl, rects, target, rectClass = RECT_CLASS, onSavedTarge
     el.style.setProperty("top", `${rect.top}%`);
     el.style.setProperty("width", `${rect.width}%`);
     el.style.setProperty("height", `${rect.height}%`);
-    layer.appendChild(el);
   }
   if (rectClass === SAVED_RECT_CLASS && target && target.key) {
-    const marker = doc.createElement("button");
-    marker.className = SAVED_MARKER_CLASS;
+    const marker = layer.createEl("button", { cls: SAVED_MARKER_CLASS });
     marker.type = "button";
     marker.dataset.backleafSavedSourceKey = target.key;
     marker.dataset.backleafSavedCount = String(target.discussions?.length || 0);
@@ -201,9 +196,7 @@ function renderLayer(pageEl, rects, target, rectClass = RECT_CLASS, onSavedTarge
       event?.stopPropagation?.();
       onSavedTargetClick?.(target);
     });
-    layer.appendChild(marker);
   }
-  pageEl.appendChild(layer);
   return layer;
 }
 

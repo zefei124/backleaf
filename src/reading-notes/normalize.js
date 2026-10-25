@@ -67,7 +67,7 @@ function extractSourceTitle(source) {
 function removeKnownVersionMarkers(value) {
   let title = String(value == null ? "" : value);
   const parenthesizedVersion =
-    /[\(（]\s*(?:全新升级版|修订版|新版|珍藏版|纪念版)\s*[\)）]/g;
+    /[(（]\s*(?:全新升级版|修订版|新版|珍藏版|纪念版)\s*[)）]/g;
   title = title.replace(parenthesizedVersion, "");
   title = title.replace(/\s*第\s*[0-9０-９一二三四五六七八九十]+\s*版\s*/g, "");
   title = title.replace(/\s*第[0-9０-９一二三四五六七八九十]+版\s*/g, "");

@@ -29,6 +29,17 @@ class FakeNode {
     return child;
   }
 
+  createDiv(options = {}) {
+    return this.createEl("div", options);
+  }
+
+  createEl(tag, options = {}) {
+    const child = this.ownerDocument.createElement(tag);
+    if (options.cls) child.className = options.cls;
+    this.appendChild(child);
+    return child;
+  }
+
   addEventListener(name, handler) {
     (this.listeners[name] ||= []).push(handler);
   }
